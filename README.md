@@ -80,8 +80,6 @@ See [`CITATION.cff`](CITATION.cff):
 
 > Ramdan, S. (2026). *Head Start or Process? Decomposing How an Experience-Acquired Abstraction Shapes Later Learning in a Small Language Model.* Zenodo. [doi:10.5281/zenodo.23432800](https://doi.org/10.5281/zenodo.23432800)
 
-The DOIs are reserved on Zenodo and resolve once the records are published.
-
 ## License
 
 MIT (code). Qwen3-1.7B is Alibaba's (Apache 2.0) and is not included.

@@ -1,0 +1,20 @@
+[    30s] meaning accuracy base fit 0.504 test 0.516 | A fit 1.000 test 1.000
+[    68s] final L16: {'U_pca4': (0.0, 0.0), 'full': (0.0, 0.0)}
+[   104s] final L20: {'U_pca4': (0.0, 0.05), 'full': (0.0, 0.07)}
+[   140s] final L24: {'U_pca4': (0.0, 0.64), 'full': (0.0, 0.64)}
+[   176s] final L26: {'U_pca4': (0.0, 0.64), 'full': (0.0, 0.64)}
+[   202s] optS L8: {'full': (0.0, 0.0)}
+[   227s] optS L12: {'full': (0.0, 0.0)}
+[   253s] optS L16: {'full': (0.0, 0.0)}
+[   278s] optS L20: {'full': (0.0, 0.0)}
+[   304s] optS L24: {'full': (0.0, 0.0)}
+[   330s] optP L8: {'full': (0.0, 0.0)}
+[   356s] optP L12: {'full': (0.0, 0.0)}
+[   382s] optP L16: {'full': (0.0, 0.0)}
+[   408s] optP L20: {'full': (0.0, 0.0)}
+[   433s] optP L24: {'full': (0.0, 0.0)}
+[   476s] opt2 L8: {'full': (0.0, 0.0)}
+[   517s] opt2 L12: {'full': (0.0, 0.0)}
+[   559s] opt2 L16: {'full': (0.0, 0.0)}
+[   601s] opt2 L20: {'full': (0.0, 0.0)}
+[   643s] opt2 L24: {'full': (0.0, 0.0)}

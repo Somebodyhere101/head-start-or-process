@@ -1,0 +1,25 @@
+[    21s] shuf_20260919: base letter distributions cached for the KL anchor (beta 0.030)
+[    29s] shuf_20260919 after 48 situations: expected vindicated (last 96) {'interpret': 0.58, 'pursue': 0.43} entropy {'interpret': 0.0, 'pursue': 0.01} letter mass {'interpret': 1.0, 'pursue': 0.99}
+[    35s] shuf_20260919 after 96 situations: expected vindicated (last 96) {'interpret': 0.52, 'pursue': 0.44} entropy {'interpret': 0.01, 'pursue': 0.02} letter mass {'interpret': 0.9, 'pursue': 0.89}
+[    41s] shuf_20260919 after 144 situations: expected vindicated (last 96) {'interpret': 0.53, 'pursue': 0.42} entropy {'interpret': 0.01, 'pursue': 0.02} letter mass {'interpret': 0.66, 'pursue': 0.74}
+[    47s] shuf_20260919 after 192 situations: expected vindicated (last 96) {'interpret': 0.53, 'pursue': 0.41} entropy {'interpret': 0.0, 'pursue': 0.01} letter mass {'interpret': 0.7, 'pursue': 0.8}
+[    54s] shuf_20260919 after 240 situations: expected vindicated (last 96) {'interpret': 0.45, 'pursue': 0.48} entropy {'interpret': 0.0, 'pursue': 0.01} letter mass {'interpret': 0.79, 'pursue': 0.78}
+[    60s] shuf_20260919 after 288 situations: expected vindicated (last 96) {'interpret': 0.47, 'pursue': 0.55} entropy {'interpret': 0.01, 'pursue': 0.03} letter mass {'interpret': 0.62, 'pursue': 0.61}
+[    65s] shuf_20260919 after 336 situations: expected vindicated (last 96) {'interpret': 0.48, 'pursue': 0.52} entropy {'interpret': 0.01, 'pursue': 0.03} letter mass {'interpret': 0.65, 'pursue': 0.6}
+[    71s] shuf_20260919 after 384 situations: expected vindicated (last 96) {'interpret': 0.43, 'pursue': 0.48} entropy {'interpret': 0.0, 'pursue': 0.01} letter mass {'interpret': 0.75, 'pursue': 0.61}
+[    77s] shuf_20260919 after 432 situations: expected vindicated (last 96) {'interpret': 0.46, 'pursue': 0.45} entropy {'interpret': 0.0, 'pursue': 0.01} letter mass {'interpret': 0.8, 'pursue': 0.66}
+[    83s] shuf_20260919 after 480 situations: expected vindicated (last 96) {'interpret': 0.54, 'pursue': 0.46} entropy {'interpret': 0.0, 'pursue': 0.01} letter mass {'interpret': 0.74, 'pursue': 0.68}
+[    89s] shuf_20260919 after 528 situations: expected vindicated (last 96) {'interpret': 0.58, 'pursue': 0.47} entropy {'interpret': 0.0, 'pursue': 0.0} letter mass {'interpret': 0.61, 'pursue': 0.65}
+[    95s] shuf_20260919 after 576 situations: expected vindicated (last 96) {'interpret': 0.53, 'pursue': 0.45} entropy {'interpret': 0.0, 'pursue': 0.0} letter mass {'interpret': 0.66, 'pursue': 0.65}
+[   101s] shuf_20260919 after 624 situations: expected vindicated (last 96) {'interpret': 0.43, 'pursue': 0.5} entropy {'interpret': 0.0, 'pursue': 0.01} letter mass {'interpret': 0.75, 'pursue': 0.65}
+[   107s] shuf_20260919 after 672 situations: expected vindicated (last 96) {'interpret': 0.49, 'pursue': 0.54} entropy {'interpret': 0.01, 'pursue': 0.02} letter mass {'interpret': 0.82, 'pursue': 0.78}
+[   113s] shuf_20260919 after 720 situations: expected vindicated (last 96) {'interpret': 0.51, 'pursue': 0.49} entropy {'interpret': 0.01, 'pursue': 0.01} letter mass {'interpret': 0.84, 'pursue': 0.83}
+[   119s] shuf_20260919 after 768 situations: expected vindicated (last 96) {'interpret': 0.42, 'pursue': 0.46} entropy {'interpret': 0.0, 'pursue': 0.02} letter mass {'interpret': 0.83, 'pursue': 0.82}
+[   125s] shuf_20260919 after 816 situations: expected vindicated (last 96) {'interpret': 0.49, 'pursue': 0.51} entropy {'interpret': 0.0, 'pursue': 0.02} letter mass {'interpret': 0.85, 'pursue': 0.88}
+[   131s] shuf_20260919 after 864 situations: expected vindicated (last 96) {'interpret': 0.57, 'pursue': 0.49} entropy {'interpret': 0.0, 'pursue': 0.0} letter mass {'interpret': 0.85, 'pursue': 0.89}
+[   136s] shuf_20260919 after 912 situations: expected vindicated (last 96) {'interpret': 0.56, 'pursue': 0.46} entropy {'interpret': 0.01, 'pursue': 0.01} letter mass {'interpret': 0.9, 'pursue': 0.91}
+[   142s] shuf_20260919 after 960 situations: expected vindicated (last 96) {'interpret': 0.51, 'pursue': 0.47} entropy {'interpret': 0.01, 'pursue': 0.01} letter mass {'interpret': 0.96, 'pursue': 0.95}
+[   148s] shuf_20260919 after 1008 situations: expected vindicated (last 96) {'interpret': 0.41, 'pursue': 0.5} entropy {'interpret': 0.01, 'pursue': 0.01} letter mass {'interpret': 0.96, 'pursue': 0.97}
+[   154s] shuf_20260919 after 1056 situations: expected vindicated (last 96) {'interpret': 0.49, 'pursue': 0.5} entropy {'interpret': 0.01, 'pursue': 0.01} letter mass {'interpret': 0.86, 'pursue': 0.88}
+[   160s] shuf_20260919 after 1104 situations: expected vindicated (last 96) {'interpret': 0.53, 'pursue': 0.43} entropy {'interpret': 0.0, 'pursue': 0.01} letter mass {'interpret': 0.78, 'pursue': 0.76}
+[   166s] shuf_20260919 after 1152 situations: expected vindicated (last 96) {'interpret': 0.41, 'pursue': 0.44} entropy {'interpret': 0.01, 'pursue': 0.01} letter mass {'interpret': 0.82, 'pursue': 0.84}

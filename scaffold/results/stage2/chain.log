@@ -1,0 +1,198 @@
+[2026-10-17T01:01:04] grid start; PC factor file 'none'; base-cell arms base
+[2026-10-17T01:01:19] start bind_b101_ST2_20260919 base
+[2026-10-17T01:02:41] end bind_b101_ST2_20260919 exit 0
+[2026-10-17T01:02:56] start bind_b101_ST2_20260919 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T01:08:00] end bind_b101_ST2_20260919 exit 0
+[2026-10-17T01:08:15] start bind_b101_ST2_20260921 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T01:13:19] end bind_b101_ST2_20260921 exit 0
+[2026-10-17T01:13:34] start bind_b101_ST2_20260922 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T01:18:39] end bind_b101_ST2_20260922 exit 0
+[2026-10-17T01:18:54] start bind_b101_ST2b_20260920 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T01:23:58] end bind_b101_ST2b_20260920 exit 0
+[2026-10-17T01:24:13] start bind_b101_P1_20260923 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T01:29:16] end bind_b101_P1_20260923 exit 0
+[2026-10-17T01:29:32] start bind_b101_P1_20260924 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T01:34:38] end bind_b101_P1_20260924 exit 0
+[2026-10-17T01:34:53] start bind_b101_shuf_20260919 A_matched
+[2026-10-17T01:36:29] end bind_b101_shuf_20260919 exit 0
+[2026-10-17T01:36:45] start bind_b101_shuf_20260921 A_matched
+[2026-10-17T01:38:21] end bind_b101_shuf_20260921 exit 0
+[2026-10-17T01:38:36] start bind_b101_shuf_20260922 A_matched
+[2026-10-17T01:40:12] end bind_b101_shuf_20260922 exit 0
+[2026-10-17T01:40:27] start bind_b101_single_20260919 A_matched
+[2026-10-17T01:41:51] end bind_b101_single_20260919 exit 0
+[2026-10-17T01:42:07] start bind_b101_single_20260921 A_matched
+[2026-10-17T01:43:28] end bind_b101_single_20260921 exit 0
+[2026-10-17T01:43:43] start bind_b101_single_20260922 A_matched
+[2026-10-17T01:45:05] end bind_b101_single_20260922 exit 0
+[2026-10-17T01:45:20] start bind_b101_perm_20260919 A_matched
+[2026-10-17T01:46:42] end bind_b101_perm_20260919 exit 0
+[2026-10-17T01:46:57] start bind_b101_perm_20260921 A_matched
+[2026-10-17T01:48:19] end bind_b101_perm_20260921 exit 0
+[2026-10-17T01:48:34] start bind_b101_perm_20260922 A_matched
+[2026-10-17T01:49:56] end bind_b101_perm_20260922 exit 0
+[2026-10-17T01:50:11] start bext_b101_ST2_20260919 base
+[2026-10-17T01:51:55] end bext_b101_ST2_20260919 exit 0
+[2026-10-17T01:52:10] start bext_b101_ST2_20260919 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T01:58:45] end bext_b101_ST2_20260919 exit 0
+[2026-10-17T01:59:00] start bext_b101_ST2_20260921 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T02:05:38] end bext_b101_ST2_20260921 exit 0
+[2026-10-17T02:05:53] start bext_b101_ST2_20260922 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T02:12:28] end bext_b101_ST2_20260922 exit 0
+[2026-10-17T02:12:43] start bext_b101_ST2b_20260920 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T02:19:21] end bext_b101_ST2b_20260920 exit 0
+[2026-10-17T02:19:37] start bext_b101_P1_20260923 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T02:26:12] end bext_b101_P1_20260923 exit 0
+[2026-10-17T02:26:27] start bext_b101_P1_20260924 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T02:33:02] end bext_b101_P1_20260924 exit 0
+[2026-10-17T02:33:17] start bext_b101_shuf_20260919 A_matched
+[2026-10-17T02:35:02] end bext_b101_shuf_20260919 exit 0
+[2026-10-17T02:35:17] start bext_b101_shuf_20260921 A_matched
+[2026-10-17T02:37:01] end bext_b101_shuf_20260921 exit 0
+[2026-10-17T02:37:16] start bext_b101_shuf_20260922 A_matched
+[2026-10-17T02:39:01] end bext_b101_shuf_20260922 exit 0
+[2026-10-17T02:39:16] start bext_b101_single_20260919 A_matched
+[2026-10-17T02:41:00] end bext_b101_single_20260919 exit 0
+[2026-10-17T02:41:16] start bext_b101_single_20260921 A_matched
+[2026-10-17T02:43:00] end bext_b101_single_20260921 exit 0
+[2026-10-17T02:43:15] start bext_b101_single_20260922 A_matched
+[2026-10-17T02:45:00] end bext_b101_single_20260922 exit 0
+[2026-10-17T02:45:15] start bext_b101_perm_20260919 A_matched
+[2026-10-17T02:47:00] end bext_b101_perm_20260919 exit 0
+[2026-10-17T02:47:15] start bext_b101_perm_20260921 A_matched
+[2026-10-17T02:49:01] end bext_b101_perm_20260921 exit 0
+[2026-10-17T02:49:16] start bext_b101_perm_20260922 A_matched
+[2026-10-17T02:51:01] end bext_b101_perm_20260922 exit 0
+[2026-10-17T02:51:16] start bind_b102_ST2_20260919 base
+[2026-10-17T02:52:37] end bind_b102_ST2_20260919 exit 0
+[2026-10-17T02:52:53] start bind_b102_ST2_20260919 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T02:57:57] end bind_b102_ST2_20260919 exit 0
+[2026-10-17T02:58:12] start bind_b102_ST2_20260921 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T03:03:17] end bind_b102_ST2_20260921 exit 0
+[2026-10-17T03:03:32] start bind_b102_ST2_20260922 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T03:08:36] end bind_b102_ST2_20260922 exit 0
+[2026-10-17T03:08:51] start bind_b102_ST2b_20260920 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T03:13:57] end bind_b102_ST2b_20260920 exit 0
+[2026-10-17T03:14:12] start bind_b102_P1_20260923 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T03:19:18] end bind_b102_P1_20260923 exit 0
+[2026-10-17T03:19:34] start bind_b102_P1_20260924 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T03:24:38] end bind_b102_P1_20260924 exit 0
+[2026-10-17T03:24:53] start bind_b102_shuf_20260919 A_matched
+[2026-10-17T03:26:15] end bind_b102_shuf_20260919 exit 0
+[2026-10-17T03:26:30] start bind_b102_shuf_20260921 A_matched
+[2026-10-17T03:27:52] end bind_b102_shuf_20260921 exit 0
+[2026-10-17T03:28:07] start bind_b102_shuf_20260922 A_matched
+[2026-10-17T03:29:29] end bind_b102_shuf_20260922 exit 0
+[2026-10-17T03:29:44] start bind_b102_single_20260919 A_matched
+[2026-10-17T03:31:06] end bind_b102_single_20260919 exit 0
+[2026-10-17T03:31:21] start bind_b102_single_20260921 A_matched
+[2026-10-17T03:32:43] end bind_b102_single_20260921 exit 0
+[2026-10-17T03:32:58] start bind_b102_single_20260922 A_matched
+[2026-10-17T03:34:20] end bind_b102_single_20260922 exit 0
+[2026-10-17T03:34:35] start bind_b102_perm_20260919 A_matched
+[2026-10-17T03:35:57] end bind_b102_perm_20260919 exit 0
+[2026-10-17T03:36:12] start bind_b102_perm_20260921 A_matched
+[2026-10-17T03:37:34] end bind_b102_perm_20260921 exit 0
+[2026-10-17T03:37:49] start bind_b102_perm_20260922 A_matched
+[2026-10-17T03:39:10] end bind_b102_perm_20260922 exit 0
+[2026-10-17T03:39:26] start bext_b102_ST2_20260919 base
+[2026-10-17T03:41:22] end bext_b102_ST2_20260919 exit 0
+[2026-10-17T03:41:37] start bext_b102_ST2_20260919 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T03:48:19] end bext_b102_ST2_20260919 exit 0
+[2026-10-17T03:48:34] start bext_b102_ST2_20260921 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T03:55:11] end bext_b102_ST2_20260921 exit 0
+[2026-10-17T03:55:26] start bext_b102_ST2_20260922 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T04:02:03] end bext_b102_ST2_20260922 exit 0
+[2026-10-17T04:02:18] start bext_b102_ST2b_20260920 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T04:08:54] end bext_b102_ST2b_20260920 exit 0
+[2026-10-17T04:09:09] start bext_b102_P1_20260923 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T04:15:47] end bext_b102_P1_20260923 exit 0
+[2026-10-17T04:16:02] start bext_b102_P1_20260924 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T04:22:38] end bext_b102_P1_20260924 exit 0
+[2026-10-17T04:22:54] start bext_b102_shuf_20260919 A_matched
+[2026-10-17T04:24:38] end bext_b102_shuf_20260919 exit 0
+[2026-10-17T04:24:53] start bext_b102_shuf_20260921 A_matched
+[2026-10-17T04:26:38] end bext_b102_shuf_20260921 exit 0
+[2026-10-17T04:26:53] start bext_b102_shuf_20260922 A_matched
+[2026-10-17T04:28:38] end bext_b102_shuf_20260922 exit 0
+[2026-10-17T04:28:53] start bext_b102_single_20260919 A_matched
+[2026-10-17T04:30:37] end bext_b102_single_20260919 exit 0
+[2026-10-17T04:30:52] start bext_b102_single_20260921 A_matched
+[2026-10-17T04:32:38] end bext_b102_single_20260921 exit 0
+[2026-10-17T04:32:53] start bext_b102_single_20260922 A_matched
+[2026-10-17T04:34:38] end bext_b102_single_20260922 exit 0
+[2026-10-17T04:34:54] start bext_b102_perm_20260919 A_matched
+[2026-10-17T04:36:39] end bext_b102_perm_20260919 exit 0
+[2026-10-17T04:36:54] start bext_b102_perm_20260921 A_matched
+[2026-10-17T04:38:39] end bext_b102_perm_20260921 exit 0
+[2026-10-17T04:38:54] start bext_b102_perm_20260922 A_matched
+[2026-10-17T04:40:39] end bext_b102_perm_20260922 exit 0
+[2026-10-17T04:40:54] start bind_b103_ST2_20260919 base
+[2026-10-17T04:42:16] end bind_b103_ST2_20260919 exit 0
+[2026-10-17T04:42:31] start bind_b103_ST2_20260919 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T04:47:38] end bind_b103_ST2_20260919 exit 0
+[2026-10-17T04:47:54] start bind_b103_ST2_20260921 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T04:52:59] end bind_b103_ST2_20260921 exit 0
+[2026-10-17T04:53:14] start bind_b103_ST2_20260922 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T04:58:18] end bind_b103_ST2_20260922 exit 0
+[2026-10-17T04:58:34] start bind_b103_ST2b_20260920 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T05:03:39] end bind_b103_ST2b_20260920 exit 0
+[2026-10-17T05:03:54] start bind_b103_P1_20260923 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T05:08:58] end bind_b103_P1_20260923 exit 0
+[2026-10-17T05:09:13] start bind_b103_P1_20260924 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T05:14:17] end bind_b103_P1_20260924 exit 0
+[2026-10-17T05:14:32] start bind_b103_shuf_20260919 A_matched
+[2026-10-17T05:15:54] end bind_b103_shuf_20260919 exit 0
+[2026-10-17T05:16:09] start bind_b103_shuf_20260921 A_matched
+[2026-10-17T05:17:31] end bind_b103_shuf_20260921 exit 0
+[2026-10-17T05:17:47] start bind_b103_shuf_20260922 A_matched
+[2026-10-17T05:19:08] end bind_b103_shuf_20260922 exit 0
+[2026-10-17T05:19:23] start bind_b103_single_20260919 A_matched
+[2026-10-17T05:20:45] end bind_b103_single_20260919 exit 0
+[2026-10-17T05:21:00] start bind_b103_single_20260921 A_matched
+[2026-10-17T05:22:22] end bind_b103_single_20260921 exit 0
+[2026-10-17T05:22:37] start bind_b103_single_20260922 A_matched
+[2026-10-17T05:23:59] end bind_b103_single_20260922 exit 0
+[2026-10-17T05:24:14] start bind_b103_perm_20260919 A_matched
+[2026-10-17T05:25:36] end bind_b103_perm_20260919 exit 0
+[2026-10-17T05:25:51] start bind_b103_perm_20260921 A_matched
+[2026-10-17T05:27:13] end bind_b103_perm_20260921 exit 0
+[2026-10-17T05:27:28] start bind_b103_perm_20260922 A_matched
+[2026-10-17T05:28:50] end bind_b103_perm_20260922 exit 0
+[2026-10-17T05:29:05] start bext_b103_ST2_20260919 base
+[2026-10-17T05:30:49] end bext_b103_ST2_20260919 exit 0
+[2026-10-17T05:31:05] start bext_b103_ST2_20260919 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T05:37:41] end bext_b103_ST2_20260919 exit 0
+[2026-10-17T05:37:56] start bext_b103_ST2_20260921 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T05:44:32] end bext_b103_ST2_20260921 exit 0
+[2026-10-17T05:44:47] start bext_b103_ST2_20260922 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T05:51:23] end bext_b103_ST2_20260922 exit 0
+[2026-10-17T05:51:38] start bext_b103_ST2b_20260920 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T05:58:13] end bext_b103_ST2b_20260920 exit 0
+[2026-10-17T05:58:28] start bext_b103_P1_20260923 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T06:05:06] end bext_b103_P1_20260923 exit 0
+[2026-10-17T06:05:21] start bext_b103_P1_20260924 A_raw,prior,A_matched,A_matched_fade
+[2026-10-17T06:11:56] end bext_b103_P1_20260924 exit 0
+[2026-10-17T06:12:12] start bext_b103_shuf_20260919 A_matched
+[2026-10-17T06:13:56] end bext_b103_shuf_20260919 exit 0
+[2026-10-17T06:14:11] start bext_b103_shuf_20260921 A_matched
+[2026-10-17T06:15:56] end bext_b103_shuf_20260921 exit 0
+[2026-10-17T06:16:11] start bext_b103_shuf_20260922 A_matched
+[2026-10-17T06:17:56] end bext_b103_shuf_20260922 exit 0
+[2026-10-17T06:18:11] start bext_b103_single_20260919 A_matched
+[2026-10-17T06:19:56] end bext_b103_single_20260919 exit 0
+[2026-10-17T06:20:11] start bext_b103_single_20260921 A_matched
+[2026-10-17T06:21:55] end bext_b103_single_20260921 exit 0
+[2026-10-17T06:22:10] start bext_b103_single_20260922 A_matched
+[2026-10-17T06:23:55] end bext_b103_single_20260922 exit 0
+[2026-10-17T06:24:10] start bext_b103_perm_20260919 A_matched
+[2026-10-17T06:25:54] end bext_b103_perm_20260919 exit 0
+[2026-10-17T06:26:09] start bext_b103_perm_20260921 A_matched
+[2026-10-17T06:27:54] end bext_b103_perm_20260921 exit 0
+[2026-10-17T06:28:09] start bext_b103_perm_20260922 A_matched
+[2026-10-17T06:29:54] end bext_b103_perm_20260922 exit 0
+[2026-10-17T06:30:09] start bind_b101_ST2_20260919 base
+[2026-10-17T06:30:09] end bind_b101_ST2_20260919 exit 0
+[2026-10-17T06:30:09] start bext_b101_ST2_20260919 base
+[2026-10-17T06:30:09] end bext_b101_ST2_20260919 exit 0
+[2026-10-17T06:30:09] GRID DONE

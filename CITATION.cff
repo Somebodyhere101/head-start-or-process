@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this code or data, please cite the paper."
+title: "Head Start or Process? (SCAFFOLD): code and data"
+authors:
+  - family-names: Ramdan
+    given-names: Sam
+    orcid: "https://orcid.org/0009-0004-7723-4240"
+repository-code: "https://github.com/Somebodyhere101/head-start-or-process"
+license: MIT
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23432800
+    description: "The paper and its code-and-data archive on Zenodo"
+  - type: doi
+    value: 10.5281/zenodo.23432798
+    description: "The frozen F_sign forecast for the four held-out adapters"
+preferred-citation:
+  type: article
+  title: "Head Start or Process? Decomposing How an Experience-Acquired Abstraction Shapes Later Learning in a Small Language Model"
+  authors:
+    - family-names: Ramdan
+      given-names: Sam
+      orcid: "https://orcid.org/0009-0004-7723-4240"
+  year: 2026
+  month: 10
+  publisher:
+    name: Zenodo
+  doi: 10.5281/zenodo.23432800

@@ -1,0 +1,4 @@
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|##########| 311/311 [00:00<00:00, 11669.50it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|##########| 311/311 [00:00<00:00, 11137.63it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|##########| 311/311 [00:00<00:00, 10463.97it/s]
+P1_20260928 bind b101 A_matched: {'F_res': 9.2501, 'F_sign': 28.2295, 'CKA_type': 0.0468, 'raw_scale': 101091.6797, 'mean_residual': 0.5005}

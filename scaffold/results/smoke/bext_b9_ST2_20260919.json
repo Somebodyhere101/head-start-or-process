@@ -1,0 +1,437 @@
+{
+ "rule": "bext",
+ "bseed": 9,
+ "adapter": "ST2_20260919",
+ "passes": 2,
+ "n_train": 16,
+ "n_eval": 16,
+ "arms": {
+  "base": {
+   "t0": {
+    "bal": 0.5,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 0.0,
+     "nm_infra": 0.0,
+     "nm_desk": 0.0
+    },
+    "acc": 0.5
+   },
+   "trace": [
+    {
+     "bal": 0.5,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 0.0,
+      "nm_infra": 0.0,
+      "nm_desk": 0.0
+     },
+     "seen": 8,
+     "grad_norm": 0.8826085925102234,
+     "vind": 0.2500007152557373
+    },
+    {
+     "bal": 0.5,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 0.0,
+      "nm_infra": 0.0,
+      "nm_desk": 0.0
+     },
+     "seen": 16,
+     "grad_norm": 1.632330060005188,
+     "vind": 0.7499999403953552
+    },
+    {
+     "bal": 0.4375,
+     "by_type": {
+      "pos": 0.875,
+      "nm_time": 0.0,
+      "nm_infra": 0.0,
+      "nm_desk": 0.0
+     },
+     "seen": 24,
+     "grad_norm": 1.08797287940979,
+     "vind": 0.25
+    },
+    {
+     "bal": 0.4375,
+     "by_type": {
+      "pos": 0.875,
+      "nm_time": 0.0,
+      "nm_infra": 0.0,
+      "nm_desk": 0.0
+     },
+     "seen": 32,
+     "grad_norm": 7.205881118774414,
+     "vind": 0.7475728988647461
+    }
+   ],
+   "final_own": {
+    "bal": 0.4375,
+    "by_type": {
+     "pos": 0.875,
+     "nm_time": 0.0,
+     "nm_infra": 0.0,
+     "nm_desk": 0.0
+    },
+    "acc": 0.4375
+   },
+   "final_own_shift": {
+    "bal": 0.6111111111111112,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 0.3333333333333333,
+     "nm_infra": 0.3333333333333333,
+     "nm_desk": 0.0
+    },
+    "acc": 0.625
+   },
+   "scaffold": {
+    "bal": 0.4375,
+    "by_type": {
+     "pos": 0.875,
+     "nm_time": 0.0,
+     "nm_infra": 0.0,
+     "nm_desk": 0.0
+    },
+    "acc": 0.4375
+   },
+   "scaffold_shift": {
+    "bal": 0.6111111111111112,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 0.3333333333333333,
+     "nm_infra": 0.3333333333333333,
+     "nm_desk": 0.0
+    },
+    "acc": 0.625
+   },
+   "G": 0.46875,
+   "seconds": 24.958487272262573
+  },
+  "A_raw": {
+   "t0": {
+    "bal": 0.7222222222222222,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 1.0,
+     "nm_infra": 0.3333333333333333,
+     "nm_desk": 0.0
+    },
+    "acc": 0.75
+   },
+   "trace": [
+    {
+     "bal": 0.7222222222222222,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 0.3333333333333333,
+      "nm_desk": 0.0
+     },
+     "seen": 8,
+     "grad_norm": 8.058483123779297,
+     "vind": 0.5
+    },
+    {
+     "bal": 0.7222222222222222,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 0.3333333333333333,
+      "nm_desk": 0.0
+     },
+     "seen": 16,
+     "grad_norm": 1.777673363685608,
+     "vind": 1.0
+    },
+    {
+     "bal": 0.6597222222222222,
+     "by_type": {
+      "pos": 0.875,
+      "nm_time": 1.0,
+      "nm_infra": 0.3333333333333333,
+      "nm_desk": 0.0
+     },
+     "seen": 24,
+     "grad_norm": 0.5258662104606628,
+     "vind": 0.5
+    },
+    {
+     "bal": 0.7986111111111112,
+     "by_type": {
+      "pos": 0.875,
+      "nm_time": 1.0,
+      "nm_infra": 0.6666666666666666,
+      "nm_desk": 0.5
+     },
+     "seen": 32,
+     "grad_norm": 2.284884452819824,
+     "vind": 0.75
+    }
+   ],
+   "final_own": {
+    "bal": 0.7986111111111112,
+    "by_type": {
+     "pos": 0.875,
+     "nm_time": 1.0,
+     "nm_infra": 0.6666666666666666,
+     "nm_desk": 0.5
+    },
+    "acc": 0.8125
+   },
+   "final_own_shift": {
+    "bal": 0.7986111111111112,
+    "by_type": {
+     "pos": 0.875,
+     "nm_time": 1.0,
+     "nm_infra": 0.6666666666666666,
+     "nm_desk": 0.5
+    },
+    "acc": 0.8125
+   },
+   "scaffold": {
+    "bal": 0.5,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 0.0,
+     "nm_infra": 0.0,
+     "nm_desk": 0.0
+    },
+    "acc": 0.5
+   },
+   "scaffold_shift": {
+    "bal": 0.5,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 0.0,
+     "nm_infra": 0.0,
+     "nm_desk": 0.0
+    },
+    "acc": 0.5
+   },
+   "G": 0.7256944444444444,
+   "seconds": 11.257886409759521
+  },
+  "prior": {
+   "t0": {
+    "bal": 0.7222222222222222,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 1.0,
+     "nm_infra": 0.3333333333333333,
+     "nm_desk": 0.0
+    },
+    "acc": 0.75
+   },
+   "trace": [
+    {
+     "bal": 0.7222222222222222,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 0.3333333333333333,
+      "nm_desk": 0.0
+     },
+     "seen": 8,
+     "grad_norm": 1.1711785793304443,
+     "vind": 0.5
+    },
+    {
+     "bal": 0.7222222222222222,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 0.3333333333333333,
+      "nm_desk": 0.0
+     },
+     "seen": 16,
+     "grad_norm": 3.5167438983917236,
+     "vind": 1.0
+    },
+    {
+     "bal": 0.7222222222222222,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 0.3333333333333333,
+      "nm_desk": 0.0
+     },
+     "seen": 24,
+     "grad_norm": 2.1370139122009277,
+     "vind": 0.5
+    },
+    {
+     "bal": 0.7222222222222222,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 0.3333333333333333,
+      "nm_desk": 0.0
+     },
+     "seen": 32,
+     "grad_norm": 3.3726322650909424,
+     "vind": 1.0
+    }
+   ],
+   "final_own": {
+    "bal": 0.7222222222222222,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 1.0,
+     "nm_infra": 0.3333333333333333,
+     "nm_desk": 0.0
+    },
+    "acc": 0.75
+   },
+   "final_own_shift": {
+    "bal": 0.7222222222222222,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 1.0,
+     "nm_infra": 0.3333333333333333,
+     "nm_desk": 0.0
+    },
+    "acc": 0.75
+   },
+   "scaffold": {
+    "bal": 0.3680555555555556,
+    "by_type": {
+     "pos": 0.625,
+     "nm_time": 0.3333333333333333,
+     "nm_infra": 0.0,
+     "nm_desk": 0.0
+    },
+    "acc": 0.375
+   },
+   "scaffold_shift": {
+    "bal": 0.5486111111111112,
+    "by_type": {
+     "pos": 0.875,
+     "nm_time": 0.3333333333333333,
+     "nm_infra": 0.3333333333333333,
+     "nm_desk": 0.0
+    },
+    "acc": 0.5625
+   },
+   "G": 0.7222222222222222,
+   "seconds": 11.467900276184082
+  },
+  "A_matched": {
+   "t0": {
+    "bal": 0.5,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 0.0,
+     "nm_infra": 0.0,
+     "nm_desk": 0.0
+    },
+    "acc": 0.5
+   },
+   "trace": [
+    {
+     "bal": 0.5,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 0.0,
+      "nm_infra": 0.0,
+      "nm_desk": 0.0
+     },
+     "seen": 8,
+     "grad_norm": 0.5231735706329346,
+     "vind": 0.2501718997955322
+    },
+    {
+     "bal": 0.5,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 0.0,
+      "nm_infra": 0.0,
+      "nm_desk": 0.0
+     },
+     "seen": 16,
+     "grad_norm": 0.1959637701511383,
+     "vind": 0.7477591037750244
+    },
+    {
+     "bal": 0.5,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 0.0,
+      "nm_infra": 0.0,
+      "nm_desk": 0.0
+     },
+     "seen": 24,
+     "grad_norm": 0.34161698818206787,
+     "vind": 0.2502589821815491
+    },
+    {
+     "bal": 0.5763888888888888,
+     "by_type": {
+      "pos": 0.875,
+      "nm_time": 0.0,
+      "nm_infra": 0.3333333333333333,
+      "nm_desk": 0.5
+     },
+     "seen": 32,
+     "grad_norm": 3.6118171215057373,
+     "vind": 0.7459396719932556
+    }
+   ],
+   "final_own": {
+    "bal": 0.5763888888888888,
+    "by_type": {
+     "pos": 0.875,
+     "nm_time": 0.0,
+     "nm_infra": 0.3333333333333333,
+     "nm_desk": 0.5
+    },
+    "acc": 0.5625
+   },
+   "final_own_shift": {
+    "bal": 0.6388888888888888,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 0.0,
+     "nm_infra": 0.3333333333333333,
+     "nm_desk": 0.5
+    },
+    "acc": 0.625
+   },
+   "scaffold": {
+    "bal": 0.5,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 0.0,
+     "nm_infra": 0.0,
+     "nm_desk": 0.0
+    },
+    "acc": 0.5
+   },
+   "scaffold_shift": {
+    "bal": 0.5,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 0.0,
+     "nm_infra": 0.0,
+     "nm_desk": 0.0
+    },
+    "acc": 0.5
+   },
+   "G": 0.5190972222222222,
+   "seconds": 11.432323694229126
+  }
+ },
+ "prereg_sha": "37506f0cc5994493aaeb8eb805b18d978a2c8218bc8692d21d3ce96607b65fdc",
+ "t0": {
+  "base_eval": 0.5,
+  "A_eval": 0.7222222222222222,
+  "A_minus_base_lp_absmean": 75.9734115600586
+ },
+ "exactness": {
+  "phi_zero_maxdiff": 0.0,
+  "matched_vs_base_maxdiff": 3.814697265625e-06
+ },
+ "seconds": 71.81868124008179
+}

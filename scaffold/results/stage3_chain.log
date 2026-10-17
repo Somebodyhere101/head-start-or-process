@@ -1,0 +1,4 @@
+[2026-10-17T09:28:25] stage3 start
+[2026-10-17T09:28:25] start q06 stage3_pilot_q06 bind_b1_ST2s_20260919 base,A_raw
+[2026-10-17T09:31:43] end q06 stage3_pilot_q06 bind_b1_ST2s_20260919 exit 0
+[2026-10-17T09:32:29] start q06 stage3_pilot_q06 bind_b2_ST2s_20260919 base,A_raw

@@ -1,0 +1,19 @@
+{
+ "rule": "bind",
+ "bseed": 9,
+ "adapter": "ST2_20260919",
+ "passes": 6,
+ "n_train": 16,
+ "n_eval": 16,
+ "arms": {},
+ "prereg_sha": "37506f0cc5994493aaeb8eb805b18d978a2c8218bc8692d21d3ce96607b65fdc",
+ "t0": {
+  "base_eval": 0.5,
+  "A_eval": 0.4375,
+  "A_minus_base_lp_absmean": 79.97142791748047
+ },
+ "exactness": {
+  "phi_zero_maxdiff": 0.0,
+  "matched_vs_base_maxdiff": 3.814697265625e-06
+ }
+}

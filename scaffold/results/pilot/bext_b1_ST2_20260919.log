@@ -1,0 +1,5 @@
+[    28s] cell bext_b1_ST2_20260919: t0 balanced base 0.500, A 0.781
+[    33s] exactness: zero-phi max |dlp| 0.00e+00, matched vs base max |dlp| 7.51e-06
+[   157s] base         t0 0.500 -> final 0.948 | G 0.788 | scaffold 0.948 | shift own 0.896 | curve [0.5, 0.55, 0.55, 0.73, 0.55, 0.88, 0.93, 0.95, 0.96, 0.95, 0.97, 0.95] | 124 s
+[   281s] A_raw        t0 0.781 -> final 1.000 | G 0.988 | scaffold 0.531 | shift own 1.000 | curve [0.85, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0] | 124 s
+[   281s] done in 281 s

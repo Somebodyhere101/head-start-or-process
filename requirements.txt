@@ -1,0 +1,8 @@
+# Environment of the runs (Python 3.12.14, one RTX 5070 laptop GPU).
+# torch: install the CUDA 12.8 build, e.g. pip install torch==2.7.1 --index-url https://download.pytorch.org/whl/cu128
+torch==2.7.1
+transformers==5.16.1
+tokenizers==0.23.2
+huggingface-hub==1.30.0
+safetensors==0.8.0
+numpy==2.5.2

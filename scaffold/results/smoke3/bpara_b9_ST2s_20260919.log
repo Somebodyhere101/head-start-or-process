@@ -1,0 +1,6 @@
+[    10s] cell bpara_b9_ST2s_20260919: t0 balanced base 0.625, A 0.438
+[    10s] exactness: zero-phi max |dlp| 0.00e+00, matched vs base max |dlp| 3.81e-06
+[    16s] base         t0 0.625 -> final 0.562 | G 0.594 | scaffold 0.562 | shift own 0.562 | curve [0.56, 0.62, 0.62, 0.56] | 6 s
+[    22s] base_lr2     t0 0.625 -> final 0.625 | G 0.594 | scaffold 0.625 | shift own 0.562 | curve [0.5, 0.62, 0.62, 0.62] | 6 s
+[    29s] A_matched    t0 0.625 -> final 0.500 | G 0.562 | scaffold 0.688 | shift own 0.375 | curve [0.56, 0.62, 0.56, 0.5] | 6 s
+[    29s] done in 29 s

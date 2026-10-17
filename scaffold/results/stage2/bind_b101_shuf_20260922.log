@@ -1,0 +1,9 @@
+[    31s] cell bind_b101_shuf_20260922: t0 balanced base 0.490, A 0.531
+[    37s] exactness: zero-phi max |dlp| 0.00e+00, matched vs base max |dlp| 3.81e-06
+[    94s] A_matched    t0 0.490 -> final 0.469 | G 0.471 | scaffold 0.750 | shift own 0.479 | curve [0.5, 0.36, 0.49, 0.48, 0.47, 0.53, 0.47, 0.47] | 56 s
+[    94s] done in 94 s
+[    26s] cell bind_b101_shuf_20260922: t0 balanced base 0.490, A 0.531
+[    31s] exactness: zero-phi max |dlp| 0.00e+00, matched vs base max |dlp| 3.81e-06
+[    83s] A_raw        t0 0.531 -> final 0.979 | G 0.729 | scaffold 0.917 | shift own 0.948 | curve [0.53, 0.55, 0.6, 0.68, 0.75, 0.75, 0.99, 0.98] | 52 s
+[   133s] prior        t0 0.531 -> final 0.531 | G 0.536 | scaffold 0.604 | shift own 0.521 | curve [0.53, 0.53, 0.53, 0.53, 0.53, 0.53, 0.57, 0.53] | 50 s
+[   133s] done in 133 s

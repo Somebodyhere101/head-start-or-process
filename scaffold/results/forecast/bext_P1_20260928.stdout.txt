@@ -1,0 +1,4 @@
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|##########| 311/311 [00:00<00:00, 12882.61it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|##########| 311/311 [00:00<00:00, 11680.06it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|##########| 311/311 [00:00<00:00, 9400.68it/s]
+P1_20260928 bext b101 A_matched: {'F_res': 0.6902, 'F_sign': 4.0686, 'CKA_type': 0.0184, 'raw_scale': 1785873.125, 'mean_residual': 0.502}

@@ -1,0 +1,9 @@
+[    24s] cell bext_b102_single_20260919: t0 balanced base 0.500, A 0.635
+[    29s] exactness: zero-phi max |dlp| 0.00e+00, matched vs base max |dlp| 7.15e-06
+[   102s] A_matched    t0 0.500 -> final 0.719 | G 0.560 | scaffold 0.531 | shift own 0.719 | curve [0.41, 0.4, 0.39, 0.4, 0.56, 0.76, 0.85, 0.72] | 73 s
+[   102s] done in 102 s
+[    24s] cell bext_b102_single_20260919: t0 balanced base 0.500, A 0.635
+[    29s] exactness: zero-phi max |dlp| 0.00e+00, matched vs base max |dlp| 7.15e-06
+[   103s] A_raw        t0 0.635 -> final 0.844 | G 0.621 | scaffold 0.500 | shift own 0.865 | curve [0.62, 0.67, 0.59, 0.57, 0.5, 0.5, 0.67, 0.84] | 74 s
+[   175s] prior        t0 0.635 -> final 0.656 | G 0.645 | scaffold 0.604 | shift own 0.625 | curve [0.64, 0.65, 0.65, 0.65, 0.64, 0.65, 0.65, 0.66] | 72 s
+[   175s] done in 175 s

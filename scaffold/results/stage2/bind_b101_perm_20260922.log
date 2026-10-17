@@ -1,0 +1,4 @@
+[    24s] cell bind_b101_perm_20260922: t0 balanced base 0.490, A 0.490
+[    29s] exactness: zero-phi max |dlp| 0.00e+00, matched vs base max |dlp| 1.19e-07
+[    79s] A_matched    t0 0.490 -> final 0.635 | G 0.522 | scaffold 0.646 | shift own 0.625 | curve [0.51, 0.5, 0.5, 0.5, 0.5, 0.5, 0.53, 0.64] | 50 s
+[    79s] done in 79 s

@@ -1,0 +1,4 @@
+# Preregistration files and the code are hashed byte for byte (scaffold/PREREGISTRATIONS_SHA256SUMS); never convert their line endings.
+scaffold/** -text
+ced/** -text
+retrogenesis/** -text

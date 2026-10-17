@@ -1,0 +1,18 @@
+{
+ "kind": "shuf",
+ "seed": 20260922,
+ "software_interpret_meaning_acc": {
+  "base": 0.515625,
+  "control": 0.46875,
+  "A": 1.0
+ },
+ "normalised_letter_kl_to_base": {
+  "control": 10.076224327087402,
+  "A": 10.351614952087402
+ },
+ "final_vindicated": {
+  "interpret": 0.46875000000013683,
+  "pursue": 0.42708333335356446
+ },
+ "seconds": 248.36253428459167
+}

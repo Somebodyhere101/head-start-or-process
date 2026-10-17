@@ -1,0 +1,63 @@
+[2026-10-16T23:32:20] night start
+[2026-10-16T23:32:20] start control shuf 20260919
+[2026-10-16T23:35:37] end control shuf 20260919 exit 0
+[2026-10-16T23:36:07] start control shuf 20260921
+[2026-10-16T23:39:32] end control shuf 20260921 exit 0
+[2026-10-16T23:40:02] start control shuf 20260922
+[2026-10-16T23:44:14] end control shuf 20260922 exit 0
+[2026-10-16T23:51:33] start control single 20260919
+[2026-10-16T23:54:58] end control single 20260919 exit 0
+[2026-10-16T23:55:43] start control single 20260921
+[2026-10-16T23:59:38] end control single 20260921 exit 0
+[2026-10-17T00:13:16] start control single 20260922
+[2026-10-17T00:16:07] end control single 20260922 exit 0
+[2026-10-17T00:16:22] start pc_calib_base bind_b1_ST2_20260919
+[2026-10-17T00:17:49] end pc_calib_base bind_b1_ST2_20260919 exit 0
+[2026-10-17T00:18:05] start pc_calib_f2 bind_b1_ST2_20260919
+[2026-10-17T00:19:33] end pc_calib_f2 bind_b1_ST2_20260919 exit 0
+[2026-10-17T00:19:49] start pc_calib_f4 bind_b1_ST2_20260919
+[2026-10-17T00:21:15] end pc_calib_f4 bind_b1_ST2_20260919 exit 0
+[2026-10-17T00:21:30] start pc_calib_f8 bind_b1_ST2_20260919
+[2026-10-17T00:23:00] end pc_calib_f8 bind_b1_ST2_20260919 exit 0
+[2026-10-17T00:23:15] start pc_calib_base bind_b2_ST2_20260919
+[2026-10-17T00:24:38] end pc_calib_base bind_b2_ST2_20260919 exit 0
+[2026-10-17T00:24:53] start pc_calib_f2 bind_b2_ST2_20260919
+[2026-10-17T00:26:20] end pc_calib_f2 bind_b2_ST2_20260919 exit 0
+[2026-10-17T00:26:35] start pc_calib_f4 bind_b2_ST2_20260919
+[2026-10-17T00:28:04] end pc_calib_f4 bind_b2_ST2_20260919 exit 0
+[2026-10-17T00:28:20] start pc_calib_f8 bind_b2_ST2_20260919
+[2026-10-17T00:29:45] end pc_calib_f8 bind_b2_ST2_20260919 exit 0
+[2026-10-17T00:30:01] start pc_calib_base bind_b3_ST2_20260919
+[2026-10-17T00:31:22] end pc_calib_base bind_b3_ST2_20260919 exit 0
+[2026-10-17T00:31:38] start pc_calib_f2 bind_b3_ST2_20260919
+[2026-10-17T00:33:04] end pc_calib_f2 bind_b3_ST2_20260919 exit 0
+[2026-10-17T00:33:20] start pc_calib_f4 bind_b3_ST2_20260919
+[2026-10-17T00:34:46] end pc_calib_f4 bind_b3_ST2_20260919 exit 0
+[2026-10-17T00:35:01] start pc_calib_f8 bind_b3_ST2_20260919
+[2026-10-17T00:36:27] end pc_calib_f8 bind_b3_ST2_20260919 exit 0
+[2026-10-17T00:36:42] start pc_calib_base bext_b1_ST2_20260919
+[2026-10-17T00:38:27] end pc_calib_base bext_b1_ST2_20260919 exit 0
+[2026-10-17T00:38:42] start pc_calib_f2 bext_b1_ST2_20260919
+[2026-10-17T00:40:31] end pc_calib_f2 bext_b1_ST2_20260919 exit 0
+[2026-10-17T00:40:46] start pc_calib_f4 bext_b1_ST2_20260919
+[2026-10-17T00:42:34] end pc_calib_f4 bext_b1_ST2_20260919 exit 0
+[2026-10-17T00:42:50] start pc_calib_f8 bext_b1_ST2_20260919
+[2026-10-17T00:44:39] end pc_calib_f8 bext_b1_ST2_20260919 exit 0
+[2026-10-17T00:44:54] start pc_calib_base bext_b2_ST2_20260919
+[2026-10-17T00:46:40] end pc_calib_base bext_b2_ST2_20260919 exit 0
+[2026-10-17T00:46:55] start pc_calib_f2 bext_b2_ST2_20260919
+[2026-10-17T00:48:45] end pc_calib_f2 bext_b2_ST2_20260919 exit 0
+[2026-10-17T00:49:00] start pc_calib_f4 bext_b2_ST2_20260919
+[2026-10-17T00:50:49] end pc_calib_f4 bext_b2_ST2_20260919 exit 0
+[2026-10-17T00:51:04] start pc_calib_f8 bext_b2_ST2_20260919
+[2026-10-17T00:52:53] end pc_calib_f8 bext_b2_ST2_20260919 exit 0
+[2026-10-17T00:53:08] start pc_calib_base bext_b3_ST2_20260919
+[2026-10-17T00:54:52] end pc_calib_base bext_b3_ST2_20260919 exit 0
+[2026-10-17T00:55:07] start pc_calib_f2 bext_b3_ST2_20260919
+[2026-10-17T00:56:55] end pc_calib_f2 bext_b3_ST2_20260919 exit 0
+[2026-10-17T00:57:11] start pc_calib_f4 bext_b3_ST2_20260919
+[2026-10-17T00:58:59] end pc_calib_f4 bext_b3_ST2_20260919 exit 0
+[2026-10-17T00:59:15] start pc_calib_f8 bext_b3_ST2_20260919
+[2026-10-17T01:01:03] end pc_calib_f8 bext_b3_ST2_20260919 exit 0
+[2026-10-17T01:01:03] pc factor none
+[2026-10-17T06:30:09] NIGHT DONE

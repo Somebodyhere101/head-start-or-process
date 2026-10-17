@@ -1,0 +1,486 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[round]{natbib}
+\usepackage{hyperref}
+\def\UrlBreaks{\do\/\do-}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{titling}
+\usepackage{float}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots,fillbetween}
+
+\setlength{\droptitle}{-1cm}
+\pretitle{\begin{center}\Large\bfseries}
+\posttitle{\end{center}\vspace{0.3cm}}
+\hypersetup{colorlinks=true, linkcolor=black, citecolor=blue!50!black, urlcolor=blue!50!black}
+\setlist{itemsep=2pt,topsep=3pt}
+\newcommand{\pending}[1]{\textcolor{red}{[#1]}}
+% \input is not expandable inside a tabular before \bottomrule; the TeX primitive is (as in the Ouro paper).
+\makeatletter\newcommand{\tabinput}[1]{\@@input #1 }\makeatother
+% Record DOIs: doi.tex is written by zenodo_upload/upload.py after Zenodo reserves them.
+\IfFileExists{doi.tex}{\input{doi.tex}}{\newcommand{\recorddoi}{(DOI to be assigned)}\newcommand{\forecastdoi}{(DOI to be assigned)}}
+
+\definecolor{cBase}{HTML}{7F8C8D}
+\definecolor{cRaw}{HTML}{C0504D}
+\definecolor{cPrior}{HTML}{C2620C}
+\definecolor{cMatch}{HTML}{2F5F8A}
+\definecolor{cP1}{HTML}{8E6BB8}
+\definecolor{cP2}{HTML}{4E9A63}
+\definecolor{cP3}{HTML}{D4A017}
+
+\title{Head Start or Process?\\ Decomposing How an Experience-Acquired Abstraction\\ Shapes Later Learning in a Small Language Model}
+
+\author{
+  Sam Ramdan\\
+  Independent Researcher\\
+  \texttt{sr4729820@gmail.com}\\[4pt]
+  {\small Code and data: \url{https://github.com/Somebodyhere101/head-start-or-process}}\\
+  {\small\itshape Prepared with substantial AI assistance (Claude, Anthropic); see Statements.}
+}
+\date{October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+When a network that has acquired an abstraction $A$ learns a second abstraction $B$ faster, does $A$ supply information or change the \emph{process} by which $B$ is learned? We decompose a gradient learner's function-space update into starting predictions, evidence and tangent kernel, and isolate the kernel channel with an \emph{output-matched} learner: $A$'s network with a fixed stop-gradient offset, so that it starts $B$ with the naive model's predictions. We apply it to rank-8 adapters on Qwen3-1.7B that learned a hidden two-cue conjunction from outcome-labelled episodes. The compact layer-24 mediator of $A$'s transfer is the answer-letter readout (one adapter tested fully, five on the training domains with fewer candidates). $A$'s raw advantage is a head start plus a network effect that operates only from $A$'s own saturated predictions; from matched starts, $A$'s network gives no detectable mean speed-up. Near-inert replicates of the base learner differ by up to 0.28 in mean held-out balanced accuracy, so single-run comparisons, including our preregistered ones, are dominated by trajectory noise. Against replicated references (post hoc), the mean kernel-channel benefit is below $+0.02$ at the onset of learning on a task whose rule $A$ does not share, and below $+0.09$ on a task that extends $A$, where the scaffold question stays open. Two post hoc observations suggest the method is not blind: all three shuffled-outcome adapters slowed matched-start learning (not significant at the adapter level), and one of four kernel statistics ranked the six adapters' matched-start advantage (Spearman 0.94 on both tasks, uncorrected). The preregistered positive control failed calibration, so the frozen verdict is uninterpretable.
+\end{abstract}
+
+\section{Introduction}
+
+Prior learning makes later learning easier, in animals \citep{harlow1949,tse2007} and in networks \citep{raghu2020,goudar2023}. Whether it does so by supplying \emph{information} or by changing the \emph{process} of learning is an old and still open question. Raghu et al.\ asked it of MAML (``rapid learning or feature reuse?'') and found feature reuse \citep{raghu2020}. In recurrent networks trained without a meta-objective, a schema subspace speeds later learning \citep{goudar2023}. In language models, earlier fine-tuning can change how later updates store facts \citep{krasheninnikov2024}.
+
+This paper asks the question of a specific, behaviourally characterised, experience-acquired abstraction in a language model. Three requirements make the question sharp.
+
+\paragraph{Learning curves cannot answer it.} A learner whose parameters change from $\theta_0$ to $\theta_A$ is a fixed update rule with more knowledge, and also a changed update rule; the two descriptions are equivalent \citep[cf.][]{finn2018universality}. ``$A$ changed the learner'' is therefore trivially true. The substantive claim must be about \emph{which channel} carries $A$'s influence on $B$.
+
+\paragraph{Channels.} For a gradient learner with a fresh adapter $\phi$ on top of $\theta$, the first-order function-space update on input $x$ after step $t$ is
+\begin{equation}
+f_{t+1}(x) = f_t(x) - \eta\, K_t(x, x_t)\, \nabla_f \ell\big(f_t(x_t), y_t\big), \qquad K_t = J_t P_t J_t^{\top},
+\end{equation}
+where $J_t$ is the Jacobian with respect to $\phi$ and $P_t$ the optimizer's preconditioner \citep{jacot2018,malladi2023}. $A$ can act through (i) the starting predictions $f_0$, which also set the residuals and, in our update, the policy weights; (ii) the evidence stream $(x_t,y_t)$; or (iii) the kernel $K$, i.e.\ how evidence about one item moves predictions on others. We call (i) and (ii) information and (iii) process. Reusable features of $A$ enter through $J$, so they belong to (iii) unless they also shift $f_0$.
+
+\paragraph{Identification and removal.} A strong process claim would identify $A$ inside the network, show that it acts through the kernel and not through predictions, and show that $B$, once formed with $A$'s help, stands without $A$. That last condition separates a \emph{scaffold} for forming $B$ from a \emph{component} of $B$.
+
+\paragraph{Contributions.}
+\begin{enumerate}
+\item A decomposition built from three tools. An output-matched learner isolates the kernel channel; a prior-shift learner holds $A$'s starting predictions on base's network; and abrupt and gradual removal tests separate reuse from scaffolding. All of it works in full nonlinear training, extending the linearised kernel swaps of \citet{ortizjimenez2021}.
+\item A localisation result. The compact mediator of a consequence-learned skill is the answer-letter readout, with no single-site, format-free address at the sites tested. This corrects the earlier reading of our own mediation results.
+\item A bounded mean null. From matched starting predictions, the acquired abstraction gives no detectable mean speed-up of later learning, although it changes the tangent kernel by orders of magnitude. Two post hoc observations suggest the method is not blind to process effects: saturated rule-free adapters slowed matched-start learning, and one kernel statistic ranked the adapters' matched-start advantage. Both are hypotheses; we froze the second as a forecast for four held-out adapters.
+\item A noise result with a correction. In this regime learning is jump-like, and near-inert perturbations move single-run outcomes by up to 0.28. Our preregistered design used one reference run per seed; replicating the reference changes the sign of two contrasts and shrinks a preregistered scaffold collapse from $-0.27$ to $-0.10$, leaving the scaffold question open on one task. We report the preregistered and the corrected analyses side by side.
+\end{enumerate}
+
+\section{Related Work}
+
+\paragraph{Learning to learn and feature reuse.} Learning sets \citep{harlow1949} and schema-dependent consolidation \citep{tse2007,maor2026} are the behavioural precedents. MAML-style analyses separate rapid learning from feature reuse \citep{raghu2020}. \citet{arnold2021} show that collapsing learned linear layers preserves initial predictions but destroys fast adaptation; this is the closest analogue of our output-matched null. \citet{goudar2023} identify a schema subspace whose perturbation abolishes learning-to-learn in RNNs. \citet{krasheninnikov2024} show implicit meta-learning in LMs: an earlier stage changes how later updates internalise facts. None of these separates a specific experience-acquired $A$'s kernel effect from its head start under matched information, or tests formation against use.
+
+\paragraph{Interventions during training.} Ablating concept directions during fine-tuning only changes what is learned \citep{casademunt2025}. Adding persona directions during fine-tuning and removing them at test prevents trait acquisition \citep{chen2025persona}, and that protection depends on ongoing adaptation, not on a static weight offset \citep{guan2026}. Suppressing an internal structure early changes later acquisition, with a closing window \citep{chen2024sudden}. A transplanted circuit lets a later strategy form \citep{singh2025coopetition}. Abrupt removal of a training-time prior destroys what gradual removal preserves \citep{yang2026}. Early-learning subspaces shape later representation change \citep{deng2026}. Frozen logit offsets added during training and removed at test are an established device in debiasing \citep{clark2019}. We use the device in a new role.
+
+\paragraph{Kernels and transfer.} Fine-tuning of prompted LMs is often kernel-like \citep{malladi2023}. Linearised models with a trained network's kernel and zero initial function train faster but generalise worse \citep{ortizjimenez2021}, and label--gradient alignment predicts fine-tuning \citep{deshpande2021}. \citet{ren2025} decompose the per-step influence of LLM fine-tuning updates in the same function-space form and show a ``squeezing'' effect on peaked outputs, a relative of the saturation effects we find. A model's starting predictions also shape which features later fine-tuning changes \citep{kumar2022}. Softmax policy gradient slows sharply near saturated policies \citep{mei2020}. Fine-tuning tends to enhance existing mechanisms \citep{prakash2024}. Kernel similarity is commonly measured by CKA \citep{kornblith2019}.
+
+\paragraph{Plasticity and readouts.} Prior training can also reduce later trainability: warm-started networks generalise worse \citep{ash2020}, and networks lose plasticity in continual learning \citep{lyle2023,dohare2024}. Our question is the converse, whether prior learning improves the learning process. Multiple-choice answers in LMs are produced by dedicated letter-selection mechanisms \citep{lieberum2023,wiegreffe2025}, which is where our Stage~0 finds $A$'s compact mediator. Interchange interventions follow \citet{geiger2024das}; subspace patching can mislead \citep{makelov2024}.
+
+\paragraph{Variance in fine-tuning.} Fine-tuning outcomes vary strongly with random seed, data order and initialisation, and some runs fail outright \citep{dodge2020,mosbach2021}. Benchmark comparisons that ignore this variance mislead \citep{bouthillier2021}. Crossed random factors call for resampling both factors \citep{owen2007pigeonhole}, and few clusters make cluster bootstraps anti-conservative \citep{cameron2008}. Our Section~\ref{sec:noise} shows the same problem for mechanistic training contrasts.
+
+\paragraph{Our prior work.} The $A$ adapters come from our earlier, unpublished consequence-learning study. It reported far transfer and four mediating directions at layer~24; Section~\ref{sec:stage0} reinterprets those directions.
+
+\section{Setup}\label{sec:setup}
+
+\paragraph{World and abstraction $A$.} Situations describe three anomalies logged at a site. The hidden rule is: one shared cause iff the anomalies began in the same time window \emph{and} their carriers share an infrastructure. The model answers a four-option letter question (``What is the best explanation?''; option order is shuffled). $A$ is a rank-8 LoRA on the query and value projections of every layer of Qwen3-1.7B. It is trained with an exact policy-gradient update over the four letters from revealed outcomes, on outcome-balanced plant and clinic situations (3 passes over 384 situations). It reaches 0.955--1.000 on held-out software situations on 10/10 seeds. Three caveats: the update reveals every letter's reward, so it is outcome-label supervision weighted by the model's own policy rather than bandit learning from its own choices; the domains share one sentence template; and about a third of the transfer is lexical. Six of the ten adapters, from three training series, were designated for this study in the Stage-1 preregistration; the other four are held out for confirmation.
+
+\paragraph{Abstraction $B$.} A fresh rank-8 adapter $\phi$ is trained on the software domain, on the interpret question only, with the same update.
+
+\begin{description}
+\item[B\_ind] One shared cause iff same reporting desk AND same work order; time and infrastructure are drawn independently, so $A$'s rule is irrelevant. (Its cues are repeated strings, like $A$'s infrastructure cue, so $A$ still starts it above chance.)
+\item[B\_ext] Time AND infrastructure AND desk; this extends $A$.
+\item[B\_para] Same batch value AND same supplier city, each written in three different surface forms per item (numeral, word, arithmetic; name, nickname, description). Sameness is semantic and never a repeated string (preregistered for Stage~3; not run, Section~\ref{sec:stage3}).
+\end{description}
+
+Test sets are half positives and half near-misses (one cue false). We report \emph{balanced accuracy}: the mean of positive accuracy and near-miss accuracy. It is 0.5 for a constant policy, at most 0.75 for any single-cue policy, and 1.0 for the conjunction.
+
+\paragraph{Update.} We use the frozen recipe's exact update (temperature 2, $\epsilon=0.1$ mixture on the policy weights, moving baseline, Adam $5\times10^{-4}$, batch 4; full settings in Appendix~\ref{app:details}). One change was made before any Stage-2 result was seen (after a smoke test): the KL anchor is a proper four-letter KL, because the original unnormalised form overflows under output offsets.
+
+\section{The Decomposition}\label{sec:method}
+
+Let $\ell p_\theta(x)\in\mathbb{R}^4$ be the letter log-probabilities, and let $\delta(x)=\ell p_{\theta_A}(x)-\ell p_{\theta_0}(x)$, computed once per prompt and frozen. Every arm uses the same items, item order, $\phi$ initialisation and update.
+
+\begin{description}
+\item[base] Network $\theta_0$; no offset.
+\item[A\_raw] Network $\theta_A$; no offset. This is the transfer effect as usually measured.
+\item[prior] Network $\theta_0$; offset $+\,\mathrm{sg}[\delta]$. This holds $A$'s starting predictions on base's network. It was preregistered as the information-matched null.
+\item[A\_matched] Network $\theta_A$; offset $-\,\mathrm{sg}[\delta]$. At $t=0$ its predictions, policy weights and KL anchor equal base's exactly (maximum deviation $\le 8\times10^{-6}$), while $\partial f/\partial\phi$ is $A$'s. Two terms are not matched. The letter-mass term (weight 0.1) is computed on the network's raw output (D1), so it is $A$'s. And gradient-norm clipping binds less often for $A$'s network (Section~\ref{sec:robust}).
+\item[A\_matched\_fade] As A\_matched, with $\Delta A$ scaled from 1 to 0 over the last third of the budget. Offsets were tabulated on a 0.1 grid of the scale and applied at the nearest grid point, while the weights used the exact scale, so matching during the fade is approximate (an implementation flaw found in review).
+\item[Controls] Adapters trained with the same recipe on shuffled outcomes (\emph{shuf}: saturated, no rule), on the infrastructure-only rule (\emph{single}), or $A$'s factors permuted (\emph{perm}: norm-matched, near-inert). Each is run output-matched, and in an exploratory follow-up (E2) shuf and single were also run raw and prior.
+\end{description}
+
+Let $G$ be the mean balanced held-out accuracy at eight evenly spaced points over the budget. The contrasts are:
+\begin{itemize}
+\item $\Delta_{\text{raw}}=G(\text{A\_raw})-G(\text{base})$;
+\item $\Delta_{\text{start}}=G(\text{prior})-G(\text{base})$;
+\item $\Delta_K=G(\text{A\_matched})-G(\text{base})$;
+\item $S$, the accuracy of $\theta_0+\phi$ ($A$ unmerged) learned under A\_matched, minus that of base's own $\phi$; and $S_{\text{fade}}$, the analogous contrast for the fade arm;
+\item the interaction $(\Delta_{\text{raw}}-\Delta_{\text{start}})-\Delta_K$. Its first part, $G(\text{A\_raw})-G(\text{prior})$, compares $A$'s and base's networks from the same starting predictions (namely $A$'s); we call it the \emph{start-conditional network effect}.
+\end{itemize}
+H2 (process) predicts $\Delta_K>0$, specific to $A$ relative to the controls. The scaffold form additionally predicts $S>0$.
+
+\section{Stage 0: Where Is $A$?}\label{sec:stage0}
+
+We searched for a letter-agnostic representation of $A$'s decision. Each situation was presented in all four cyclic option rotations, so that letter identity is decorrelated from meaning. We patched candidate subspaces between items of opposite decision and different rotation, and scored whether the patched choice follows the donor's \emph{meaning} or the donor's \emph{letter}. Both are measured as excess over the unpatched pairs.
+
+Sites were the final position (layers 16--26) and the last token of each decision option's text (layers 8--24). Candidates were the top PCs of $A$'s deltas, letter-residualised PCs, a class-mean decision direction, random and base-letter controls, and the whole residual.
+
+\paragraph{Result (6/6 adapters; adapters 2--6 on the fit domains only, Appendix~\ref{app:stage0}).}
+\begin{itemize}
+\item No tested site or layer transfers meaning: excess meaning-flip is 0.00 everywhere, including whole-residual swaps at both option tokens and at the final position through layer 20. Cue tokens inside the situation text were not tested.
+\item At layers 24--26, the final position carries the answer letter. A 4-dimensional subspace reproduces the whole-residual swap exactly: excess letter-copy 0.64, meaning-flip 0.00.
+\item For adapter 1, 61\% (layer 24) and 73\% (layer 26) of the A/B/C/D unembedding span lies inside that subspace, against 0.1\% for random 4-dimensional subspaces.
+\end{itemize}
+
+The ``four mediating directions'' of our earlier work are therefore the letter readout. At the sites tested, $A$'s decision has no single-site, format-free address; it may be distributed across positions, which single-site patching cannot test. Per the preregistration, the localisation test (removing $A$'s representation during $B$-learning only) was dropped.
+
+\section{Results at 1.7B (Stage 2)}\label{sec:stage2}
+
+The design is 6 $A$ adapters $\times$ 3 $B$ seeds $\times$ 2 tasks, plus 9 control adapters: 204 preregistered $B$-learning runs, plus 72 exploratory runs (E2). Adapters and $B$ seeds are crossed: every adapter learns the same three $B$ item sets, and each seed has a single base run that serves as the reference for every contrast. Budgets were set by a frozen pilot rule (the smallest number of passes at which base reached balanced accuracy $\ge0.85$ on one or two of three pilot seeds): one pass (192 situations) for B\_ind and three passes for B\_ext.
+
+\subsection{Preregistered analysis}
+
+\begin{table}[tb]\centering\small
+\begin{tabular}{lcc}
+\toprule
+Contrast & B\_ind ($A$'s rule irrelevant) & B\_ext ($A$ extends) \\
+\midrule
+$\Delta_{\text{raw}}$ & $+0.156$ [0.098, 0.211] & $+0.283$ [0.204, 0.348] \\
+$\Delta_{\text{start}}$ & $+0.067$ [0.036, 0.099] & $+0.169$ [0.135, 0.203] \\
+$\Delta_K$ & $-0.014$ [$-0.054$, 0.024] & $-0.029$ [$-0.098$, 0.047] \\
+$S$ (abrupt unmerge) & $-0.035$ [$-0.070$, 0.004] & $-0.273$ [$-0.347$, $-0.202$] \\
+$S_{\text{fade}}$ & $+0.056$ [$-0.020$, 0.145] & $-0.048$ [$-0.123$, 0.019] \\
+$\Delta_K-\Delta_K(\text{shuf})^\dagger$ & $+0.004$ [$-0.064$, 0.091] & $+0.063$ [$-0.079$, 0.188] \\
+$\Delta_K-\Delta_K(\text{single})^\dagger$ & $-0.101$ [$-0.221$, 0.027] & $+0.032$ [$-0.049$, 0.096] \\
+$\Delta_K-\Delta_K(\text{perm})^\dagger$ & $-0.043$ [$-0.099$, 0.023] & $+0.030$ [$-0.106$, 0.183] \\
+\midrule
+\multicolumn{3}{l}{\emph{Exploratory, post hoc (E1, E2)}}\\
+Interaction, $A$ adapters & $+0.103$ [0.048, 0.170] & $+0.143$ [0.083, 0.216] \\
+Interaction, shuf controls & $+0.069$ [$-0.010$, 0.151] & $+0.129$ [0.053, 0.212] \\
+Interaction, single controls & $-0.043$ [$-0.152$, 0.052] & $+0.181$ [0.067, 0.309] \\
+Learning rate $\times2$ (pure process) & $+0.074$ & $-0.109$ \\
+\bottomrule
+\end{tabular}
+\caption{Preregistered analysis, Qwen3-1.7B. Differences in $G$ (balanced accuracy) against the single base run of each $B$ seed; 95\% hierarchical-bootstrap CIs that resample adapters, then $B$ seeds within adapter. Section~\ref{sec:noise} shows why these intervals are too narrow and why the base reference is biased on B\_ext. $^\dagger$Paired with the control trained from the same seed, so only the three $A$ adapters that have one enter ($\Delta_K=-0.032$ on B\_ind and $-0.036$ on B\_ext for these three).}\label{tab:stage2}
+\end{table}
+
+As frozen, $\Delta_K$ was equivalent to zero on B\_ind (90\% CI within $\pm0.05$), $A$\_matched fell behind base late in B\_ext, and $B$ did not survive abrupt removal of $A$ on B\_ext ($S=-0.27$). No primary contrast favours H2 (Holm-adjusted one-sided $p\ge0.75$ for all four on both tasks). The frozen verdict is nevertheless ``uninterpretable'', because the process-only positive control failed calibration (Section~\ref{sec:sens}). Two features of the data, which the preregistration did not anticipate, change how Table~\ref{tab:stage2} should be read.
+
+\subsection{How noisy is one training run?}\label{sec:noise}
+
+The three perm controls are $A$'s LoRA factors, permuted. Their letter KL to base is $\le0.01$ (mean absolute letter log-probability difference 0.6--1.5 nats, mostly on improbable letters, and cancelled at $t=0$ by the offset), and their tangent kernel on $B$ matches base's (Appendix~\ref{app:kernel}). Run output-matched, they are the base learner with a near-inert perturbation of the weights, with $\phi$'s initialisation and the item order unchanged. They should reproduce base's learning curve. They do not (Figure~\ref{fig:noise}, Appendix~\ref{app:refruns}). On B\_ext seed 101 the four runs reach $G=0.42$--$0.71$ and final accuracy 0.42--0.99, and one run reaches 1.00 and then collapses to 0.50. The within-seed SD of $G$ is 0.077 on B\_ext and 0.027 on B\_ind. On B\_ext seed 101, the base run, the reference for every preregistered contrast, is the best of the four, $+0.127$ above their mean.
+
+\begin{figure}[tb]\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=3 by 1, horizontal sep=0.9cm, y descriptions at=edge left}, width=0.36\textwidth, height=0.27\textwidth, xlabel={share of budget}, ylabel={balanced accuracy}, ymin=0.35, ymax=1.03, grid=major, grid style={gray!20}, legend style={font=\scriptsize, at={(0.03,0.97)}, anchor=north west}, every axis plot/.append style={thick}]
+\nextgroupplot[title={B\_ext, seed 101}]
+\addplot[cBase, very thick] table[x=frac, y=base] {fig/refruns_bext_b101.dat}; \addlegendentry{base}
+\addplot[cP1] table[x=frac, y=p19] {fig/refruns_bext_b101.dat}; \addlegendentry{perm replicates}
+\addplot[cP2, forget plot] table[x=frac, y=p21] {fig/refruns_bext_b101.dat};
+\addplot[cP3, forget plot] table[x=frac, y=p22] {fig/refruns_bext_b101.dat};
+\nextgroupplot[title={B\_ext, seed 102}]
+\addplot[cBase, very thick] table[x=frac, y=base] {fig/refruns_bext_b102.dat};
+\addplot[cP1] table[x=frac, y=p19] {fig/refruns_bext_b102.dat};
+\addplot[cP2] table[x=frac, y=p21] {fig/refruns_bext_b102.dat};
+\addplot[cP3] table[x=frac, y=p22] {fig/refruns_bext_b102.dat};
+\nextgroupplot[title={B\_ext, seed 103}]
+\addplot[cBase, very thick] table[x=frac, y=base] {fig/refruns_bext_b103.dat};
+\addplot[cP1] table[x=frac, y=p19] {fig/refruns_bext_b103.dat};
+\addplot[cP2] table[x=frac, y=p21] {fig/refruns_bext_b103.dat};
+\addplot[cP3] table[x=frac, y=p22] {fig/refruns_bext_b103.dat};
+\end{groupplot}
+\end{tikzpicture}
+\caption{Four runs of the base learner on identical B\_ext data: base itself and three output-matched perm controls, whose weights differ from base's by a near-inert perturbation (letter KL $\le0.01$). Learning is jump-like, and the timing of the jump, and whether it holds, varies from run to run.}\label{fig:noise}
+\end{figure}
+
+The noise comes from jump-like learning. In the pilot, base's B\_ind accuracy jumped from $\le0.65$ to $\ge0.92$ within half a pass, at between half a pass and one and a half passes depending on the seed. On B\_ext the jump came at three passes, at six passes, or not within six passes. $G$ therefore mostly records when the jump happens, and small perturbations move that time. The frozen budget rule placed each budget where base had jumped on only one or two of three pilot seeds, which is where this variance is greatest. On B\_ind the budget ends at the onset of learning: the reference runs reach $G=0.50$--$0.62$ and final accuracy 0.51--0.75. B\_ind contrasts therefore concern only the onset of learning.
+
+\subsection{Robustness re-analysis (post hoc)}\label{sec:robust}
+
+We re-estimated every contrast against a four-run reference per seed: base and the three output-matched perm runs (E3, post hoc, logged before writing this section). Intervals come from a three-way bootstrap that resamples adapters, $B$ seeds and reference runs within seed. As checks, Table~\ref{tab:robust} also gives $t$ intervals over the six adapter means, which ignore seed and reference noise, and a stratified permutation test of output-matched runs against reference runs within seed.
+
+\begin{table}[tb]\centering\small
+\begin{tabular}{lrccc}
+\toprule
+Contrast vs.\ reference & Estimate & 95\% CI, three-way bootstrap & 90\% CI, $t$ (df 5) & permutation $p$\\
+\midrule
+\tabinput{tab_robust.tex}
+\bottomrule
+\end{tabular}
+\caption{Post hoc re-analysis (E3) against the four-run reference. $\Delta_K$ rows: output-matched runs of $A$ and of the rule-free (shuf) and single-cue controls. Scaffold rows use the reference runs' own scaffold evaluations; ``with $A$ $-$ without $A$'' is A\_matched's final accuracy minus that of the same $\phi$ with $A$ unmerged (no reference needed). Permutation $p$ is two-sided and treats runs within a seed as exchangeable. It ignores clustering by adapter, so it is anti-conservative for the control rows, which come from three adapters each.}\label{tab:robust}
+\end{table}
+
+\paragraph{No detectable process benefit from a matched start.} Against the reference, $\Delta_K$ is $-0.022$ on B\_ind and $+0.021$ on B\_ext, and neither differs from the reference runs (permutation $p=0.22$ and $0.59$). Two-sided equivalence within $\pm0.05$, as preregistered, holds on neither task. The H2 direction, however, is bounded. The one-sided 95\% upper bound is $+0.02$ on B\_ind and $+0.09$ on B\_ext (bootstrap and $t$ agree to $0.003$). On B\_ind this excludes a process effect the size of doubling the learning rate (Section~\ref{sec:sens}), but only at the onset of learning. On B\_ext it excludes effects of our preregistered smallest effect size of interest (0.10), barely. The late lag of A\_matched behind base on B\_ext was the lucky base run: A\_matched lies inside the reference band (Figure~\ref{fig:curves}).
+
+\paragraph{Can the output-matched learner register kernel-channel effects?} Pooled over runs, rule-free saturated adapters slow matched-start learning on B\_ind ($-0.044$ [$-0.088$, $-0.008$]; run-level permutation $p=0.005$). Those nine runs come from three adapters, and neither the permutation test nor a bootstrap over three adapters handles that clustering. At the adapter level all three are negative ($-0.015$, $-0.081$, $-0.038$), but the 95\% $t$ interval is [$-0.127$, $+0.039$]. On B\_ext the adapter means are $-0.065$, $-0.086$ and $+0.002$. Their starting predictions are matched to base's, so any such effect is a kernel-channel effect, and a negative one. This suggests, but does not establish, that the method can detect process changes; the preregistered positive control could not be calibrated. On B\_ind, $A$ lies between shuf and the reference. A rule-specific benefit of $A$ could thus be partly masked by the same saturation penalty. The paired contrasts against shuf in Table~\ref{tab:stage2} are the relevant test, and with three pairs they are too wide to decide it.
+
+\paragraph{Completion and stability.} $G$ hides two differences between A\_matched and the reference. First, completion: within budget, no A\_matched run reached balanced accuracy 0.85 on either task (0/18 each), against 3/12 reference runs on B\_ext (one-sided Fisher $p=0.05$) and 0/12 on B\_ind. The preregistered labels-to-criterion outcome is therefore censored for nearly every run, and we report these rates instead. Second, stability: 21\% of A\_matched's evaluation points on B\_ind fall below 0.45 (minimum 0.31), against none for base or the perm replicates; on B\_ext the rates are 23\% and 19\%. Below-chance accuracy means $\phi$ has pushed the output against the rule. A plausible route is $A$'s high-gain readout: a small move of $\phi$ along it re-injects $A$'s decision, with either sign, into the matched frame. Gradient-norm clipping also binds at 51--79\% of A\_matched's logged evaluation points, against 99--100\% for base and perm. These are process differences, and they do not speed learning.
+
+\begin{figure}[tb]\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=2 by 1, horizontal sep=1.6cm}, width=0.46\textwidth, height=0.32\textwidth, xlabel={share of $B$ budget}, ylabel={balanced accuracy}, ymin=0.4, ymax=1.0, grid=major, grid style={gray!20}, legend style={font=\scriptsize, at={(0.02,0.98)}, anchor=north west}]
+\nextgroupplot[title={B\_ind}]
+\addplot[name path=lo1, draw=none, forget plot] table[x=frac, y=ref_lo] {fig/curves_stage2_bind.dat};
+\addplot[name path=hi1, draw=none, forget plot] table[x=frac, y=ref_hi] {fig/curves_stage2_bind.dat};
+\addplot[cBase!25, forget plot] fill between[of=lo1 and hi1];
+\addplot[cBase, thick] table[x=frac, y=ref] {fig/curves_stage2_bind.dat}; \addlegendentry{reference (4 runs)}
+\addplot[cBase, densely dotted] table[x=frac, y=base] {fig/curves_stage2_bind.dat}; \addlegendentry{base run}
+\addplot[cRaw, thick] table[x=frac, y=A_raw] {fig/curves_stage2_bind.dat}; \addlegendentry{A\_raw}
+\addplot[cPrior, thick, dashed] table[x=frac, y=prior] {fig/curves_stage2_bind.dat}; \addlegendentry{prior}
+\addplot[cMatch, thick] table[x=frac, y=A_matched] {fig/curves_stage2_bind.dat}; \addlegendentry{A\_matched}
+\nextgroupplot[title={B\_ext}]
+\addplot[name path=lo2, draw=none, forget plot] table[x=frac, y=ref_lo] {fig/curves_stage2_bext.dat};
+\addplot[name path=hi2, draw=none, forget plot] table[x=frac, y=ref_hi] {fig/curves_stage2_bext.dat};
+\addplot[cBase!25, forget plot] fill between[of=lo2 and hi2];
+\addplot[cBase, thick] table[x=frac, y=ref] {fig/curves_stage2_bext.dat};
+\addplot[cBase, densely dotted] table[x=frac, y=base] {fig/curves_stage2_bext.dat};
+\addplot[cRaw, thick] table[x=frac, y=A_raw] {fig/curves_stage2_bext.dat};
+\addplot[cPrior, thick, dashed] table[x=frac, y=prior] {fig/curves_stage2_bext.dat};
+\addplot[cMatch, thick] table[x=frac, y=A_matched] {fig/curves_stage2_bext.dat};
+\end{groupplot}
+\end{tikzpicture}
+\caption{Mean learning curves at 1.7B (6 adapters $\times$ 3 $B$ seeds). Grey band: range of the four reference configurations (base and three perm replicates), each averaged over seeds. The prior-shift learner (base network with $A$'s saturated starting predictions) cannot move. $A$'s network learns from its own predictions (A\_raw), but from base's predictions (A\_matched) it stays within the reference band.}\label{fig:curves}
+\end{figure}
+
+\paragraph{The raw advantage: a head start and a start-conditional network effect.} Against the reference, $A$'s raw advantage is $+0.147$ (B\_ind) and $+0.333$ (B\_ext), and its frozen head start ($\Delta_{\text{start}}$) is $+0.059$ and $+0.219$. The prior-shift learner cannot move from $A$'s starting predictions (Figure~\ref{fig:curves}). $A$'s letter log-probabilities differ from base's by 75--82 nats on average, beyond what base's adapter can overturn within the budget. So $\Delta_{\text{start}}$ measures $A$'s start held fixed, not what base's network could learn from $A$'s information; in this regime the prior arm is a degenerate null. $A$'s own network does revise those predictions. From the same start, A\_raw exceeds prior by $+0.089$ [0.009, 0.196] on B\_ind and $+0.114$ [0.042, 0.175] on B\_ext. A plausible but untested mechanism is $A$'s high-gain letter readout, whose kernel scale is up to 3{,}500$\times$ base's: it gives $A$'s network the function-space step sizes needed to move saturated logits. From base's start, the same network gives no advantage.
+
+\paragraph{Is the start-conditional effect specific to $A$? Unresolved.} Our pre-written E2 rule classes the interaction as generic saturation, because shuffled-outcome adapters, which are almost as saturated as $A$ (61--75 nats against 75--82), reach 67\% and 90\% of $A$'s interaction. The rule was written after E1 had shown $A$'s interaction. The single-cue controls, equally saturated (74--77 nats), contradict it on B\_ind (interaction $-0.043$; Table~\ref{tab:stage2}). The components show that this reading does not hold. The controls reach that total by a different route: mostly through their matched-start slow-down ($-\Delta_K$), not through the start-conditional effect, where shuf reaches only $+0.034$ and $+0.030$. $A$ minus shuf on that component is $+0.055$ [$-0.07$, $+0.17$] (B\_ind) and $+0.084$ [$-0.02$, $+0.18$] (B\_ext). The single-cue control matches $A$ on B\_ext ($+0.113$), where its cue is part of the rule, but not on B\_ind ($+0.026$). We therefore withdraw the ``generic saturation'' reading: the E2 statistic did not isolate the component it was meant to test.
+
+\paragraph{Scaffold: none at the onset of learning on B\_ind, unresolved on B\_ext.} On B\_ind, where learning had barely begun (reference $G$ 0.50--0.62), the $B$ learned on top of $A$ is slightly worse than the reference once $A$ is removed ($S=-0.065$ [$-0.135$, $-0.004$]), and gradual removal does not help. On B\_ext, the preregistered collapse ($S=-0.27$) was measured against the lucky base run. Against the reference, abrupt removal costs $-0.095$ [$-0.259$, $+0.033$]. A\_matched's own $B$ loses $0.118$ [$-0.017$, $0.212$] when $A$ is unmerged, so $B$ partly uses $A$. Gradual removal leaves a $B$ that is, if anything, better than the reference ($S_{\text{fade}}=+0.130$ [$-0.013$, $+0.260$]), but the fade arm's offsets were only approximately matched (Section~\ref{sec:method}). Neither ``no scaffold'' nor ``scaffold'' is established on B\_ext.
+
+\paragraph{The kernel changes, but not usefully on average.} Before any $B$ update, $A$'s tangent kernel on $B$ prompts is $10$--$3{,}500\times$ larger in scale than base's in 11 of 12 adapter--task pairs (one is $9\times$ smaller). Its alignment with $B$'s residuals is about $10\times$ lower for the plain gradient kernel $JJ^\top$ ($F_{\text{res}}$ 1.2--11.6 versus 75--85). It is $1.5$--$5\times$ lower for the sign-gradient kernel, which approximates Adam's update ($F_{\text{sign}}$ 18--58 versus 83--90), and negative for one adapter. Alignment with item types (CKA) is 0.01--0.08 against 0.46--0.53. Permuted controls match base closely. The preregistered forecast failed: across arm $\times$ cell at seed 101, no statistic reaches Spearman 0.5 with $G$ (largest 0.23). Kernel statistics were measured on one $B$ seed and are plain means, so they are sensitive to outliers.
+
+\paragraph{Adapter-level kernel effects (post hoc).} The forecast asked whether the kernel ranks arms. Asked instead whether it ranks adapters (E4, prompted by review), the answer differs. Across the six $A$ adapters, $F_{\text{sign}}$ of the matched frame ranks mean $\Delta_K$ at Spearman 0.94 on both tasks (exact two-sided $p=0.017$ each, uncorrected; 0.067 after Bonferroni correction for the four statistics tried), and across all 15 networks at 0.60 ($p\approx0.02$). $F_{\text{res}}$, CKA and kernel scale do not ($|\rho|\le0.71$, $p\ge0.14$). The adapter with negative $F_{\text{sign}}$ (ST2\_20260922) has the worst $\Delta_K$ on both tasks ($-0.089$, $-0.120$). The shared base run cancels in a ranking across adapters, so trajectory noise of the reference cannot produce this. $F_{\text{sign}}$ does not predict the level relative to base: base's $F_{\text{sign}}$ exceeds every $A$ adapter's, yet several adapters match base. With six adapters, four statistics and a post hoc question, this is a hypothesis. It says that the mean null averages over adapter-specific kernel effects of both signs. We have frozen it as a forecast for the four held-out adapters, before any $B$-learning run on them (Appendix~\ref{app:forecast}).
+
+\subsection{Sensitivity}\label{sec:sens}
+The preregistered process-only control (amplifying updates in a calibration-gradient subspace) failed calibration. Its gains over base were $-0.06$/$-0.03$/$-0.05$ (B\_ind) and $+0.07$/$+0.08$/$+0.01$ (B\_ext) for factors 2/4/8. The frozen verdict is therefore ``uninterpretable''. A learning-rate benchmark added afterwards (E1) shows that $G$ registers known process changes on B\_ind: doubling the learning rate gives $+0.074$ (positive on all three seeds, about three times the standard error implied by the B\_ind reference noise). On B\_ext the same change gives $-0.109$, only 1.7 standard errors from zero given the B\_ext reference noise. The benchmark itself used one run per seed. Stage 3 preregisters it.
+
+\section{Preregistered but Not Run, and What Would Settle It}\label{sec:stage3}
+
+A third stage was frozen (sha256 \texttt{89b30e9f\ldots}) to close the gaps of Stage~2. It specified:
+\begin{itemize}
+\item a replication of the full design in Qwen3-0.6B, using three existing 0.6B $A$ adapters, which transfer at 0.997--1.000;
+\item B\_para at 1.7B and 0.6B, a task whose cue identity is semantic rather than a repeated string (Section~\ref{sec:setup});
+\item the learning-rate benchmark as the preregistered sensitivity control;
+\item the saturation test, now confirmatory.
+\end{itemize}
+The author stopped this stage during its pilot, after one pilot cell, to write this report. No Stage-3 result is analysed or reported here. The preregistration and generator are released. In light of this paper's problems, Stage~3 should be amended before it runs. A design that could settle the question needs:
+\begin{enumerate}
+\item at least ten $B$ seeds, with replicated base references (re-initialised or perturbed) per seed;
+\item budgets that take base past the learning jump on every seed, with time to criterion as the primary outcome;
+\item the four held-out adapters as a confirmation set for the $F_{\text{sign}}$ forecast, which is already frozen (Appendix~\ref{app:forecast});
+\item a learnable information-matched null, such as $A$'s decision at base's confidence (temperature-scaled $\delta$);
+\item a matched learner with the mass term on the matched output, fp32 offsets, exact fade offsets, and a learning-rate sweep per learner;
+\item the 0.6B replication and B\_para.
+\end{enumerate}
+On the hardware used here, this is one to two GPU-days.
+
+\section{Discussion}
+
+At this scale, an abstraction acquired from consequences shapes the learning of the next one mainly through its starting predictions, and through a network effect that operates only from those predictions. From a matched start we detect no mean benefit and bound it. Adapter-level kernel differences may exist and average out. Four lessons apply beyond our setting.
+
+First, ``$A$ changed the learning process'' must be operationalised against an information-matched null. Without the prior-shift and output-matched learners, our raw transfer of $+0.15$ to $+0.33$ would look like learning-to-learn. With them, it decomposes into a head start and an effect conditional on that start. The prior-shift null itself needs care: with saturated starts it measures a frozen start, not information.
+
+Second, replicate the reference. In jump-like learning, a single run's mean accuracy mainly reports jump timing, and near-inert perturbations moved it by up to 0.28. Our preregistered design compared every arm against one base run per seed. Against a replicated reference, two B\_ext contrasts change sign ($\Delta_K$ and $S_{\text{fade}}$), and the preregistered scaffold collapse shrinks from $-0.27$ to $-0.10$, with an interval that includes zero. Inert-perturbation replicates, such as our permuted-factor controls, are a cheap fix.
+
+Third, compact causal mediators of a fine-tuned skill can be output readouts. The four-direction structure that passed ablation and transplant tests is the letter readout. Interchange tests across answer formats are a cheap safeguard.
+
+Fourth, a large kernel change is not a useful process change by default. $A$'s kernel differs by orders of magnitude, but it is not aligned with $B$, and from a matched start it does not speed learning on average. Post hoc, the one statistic that tracked which adapters helped measured alignment under the optimizer's geometry, not scale. That is a hypothesis, frozen for a held-out test.
+
+\section{Limitations}
+\begin{itemize}
+\item One small model (Qwen3-1.7B) and a templated world; transfer is partly lexical. The preregistered 0.6B replication was not run.
+\item $A$ is learned from outcome labels weighted by the model's policy, not from sampled choices.
+\item The corrected analysis is post hoc. It treats the perm controls as replicates of base; they are minimal perturbations, and independent replicates (fresh $\phi$ initialisation or item order) might vary more.
+\item Six adapters and three $B$ seeds. With three seeds, any resampling of the seed factor is coarse, and the intervals in Table~\ref{tab:robust} may still be too narrow.
+\item On B\_ind the budget ends at the onset of learning, so B\_ind speaks only to early learning. The budget rule was frozen before the noise was known.
+\item The output-matched learner inherits $A$'s saturated softmax geometry. Saturation alone slows matched-start learning, which could mask a rule-specific benefit; the paired controls are underpowered.
+\item The prior-shift arm is degenerate under saturated offsets, so $\Delta_{\text{start}}$ is a frozen start and the interaction partly reflects the arm's inability to move.
+\item The preregistered sensitivity control failed. The learning-rate benchmark was added after the results and used one run per seed.
+\item One optimizer (Adam). Of our kernel statistics, only $F_{\text{sign}}$ reflects its preconditioning, and results may differ under SGD.
+\item The matched learner is not purely kernel-only. The letter-mass term is $A$'s, gradient clipping binds at different rates, and the fade arm's offsets were matched only on a 0.1 grid. The perm replicates are near-inert, not identical (0.6--1.5 nats mean letter log-probability difference).
+\item The adapter-level kernel result (E4) is post hoc, with six adapters, four candidate statistics, and kernels measured on one $B$ seed.
+\item The audit trail has gaps. Hashes are self-hosted, without a public timestamp. D1 followed a smoke test, though it preceded all Stage-2 results. Four scripts were extended for Stage 3 after the Stage-2 freeze, and their Stage-2 versions were not archived. The script that implements the update (\texttt{h2lib.py}) is unchanged since the Stage-2 freeze.
+\item The output-matched null equalises predictions only at $t=0$; it is a first-order construction. Analysis is at the adapter level, because Stage 0 found no single-site representation of $A$ to remove.
+\end{itemize}
+
+\section{Conclusion}
+We asked whether an experience-acquired abstraction changes how a later abstraction is learned, and built a decomposition that can tell in principle. In Qwen3-1.7B we find no evidence of a mean benefit. From matched starting predictions, any average benefit is below $+0.02$ in mean balanced accuracy at the onset of learning and below $+0.09$ later. Process effects are not ruled out either. Post hoc, saturated rule-free adapters slowed matched-start learning, though not significantly at the adapter level, and one kernel statistic ranked which $A$ adapters help and which hurt; we have frozen that ranking as a forecast for held-out adapters. The acquired skill gives a head start, and a network effect that works only from that start; whether that effect is specific to the abstraction is unresolved. On the task whose rule $A$ does not share, we see no scaffold effect at the onset of learning, the only stage our budget reached; on the task $A$ extends, the question is open. The largest lesson is methodological. In this regime one training run is not a reference, and our own preregistered design overstated two conclusions because of it. Section~\ref{sec:stage3} lists the design that could settle the question; much of it is preregistered.
+
+\section*{Statements}
+\paragraph{Preregistration.} Stage 1 was frozen on 2026-10-16 at 12:35 and Stage 2 at 23:32 (+04:00), each by sha256 together with the code. Stage 3 was frozen on 2026-10-17 at 09:28 and stopped during its pilot (D6). All deviations (D1--D6) and exploratory analyses (E1--E4) are listed in Appendix~\ref{app:prereg}. D1--D6, E1 and E2 were logged before their results were read. E3 and E4 were written after all Stage-2 results were known and are labelled post hoc throughout. All three stages were frozen within 21 hours, by hashes we host ourselves, and their design decisions were delegated to the AI system. Readers should treat the label as a record of intent and timing, not as an external guarantee. The $F_{\text{sign}}$ forecast (Appendix~\ref{app:forecast}) is registered as a separate Zenodo record (doi:\forecastdoi), published before this preprint.
+\paragraph{Code and data.} The task generator, the training and analysis code, the preregistrations, the numeric results and this paper's source are at \url{https://github.com/Somebodyhere101/head-start-or-process}. Its release v1.0 carries every learned $B$ adapter (\texttt{b-adapters-part01-of-09.zip} to \texttt{part09}) and the $A$ and control adapters. This preprint's Zenodo record (doi:\recorddoi) archives the code, the $A$ and control adapters, the logs and per-run results (\texttt{code-and-data.zip}), the preregistrations and deviation log (\texttt{preregistrations.zip}), and the \LaTeX{} source.
+\paragraph{Use of AI assistance.} Substantial AI assistance was used throughout this project. The question of whether an experience-acquired abstraction changes the process by which a later abstraction is formed, rather than only supplying information, is the author's. An AI system (Claude, Anthropic), working under the author's direction, audited the earlier studies, reviewed the literature, designed the study, wrote the preregistrations and code, ran the experiments and analyses, and drafted this paper. A separate instance of the same system reviewed the draft; that review led to the post hoc analyses E3 and E4. The preregistrations record that the author delegated the design decisions to the AI system. The author directed the work and is responsible for its content.
+
+\bibliographystyle{plainnat}
+\begin{thebibliography}{99}
+\bibitem[Arnold et al.(2021)]{arnold2021} S.~M.~R. Arnold, S.~Iqbal, and F.~Sha. When MAML can adapt fast and how to assist when it cannot. \emph{AISTATS}, 2021. arXiv:1910.13603.
+\bibitem[Ash and Adams(2020)]{ash2020} J.~T. Ash and R.~P. Adams. On warm-starting neural network training. \emph{NeurIPS}, 2020. arXiv:1910.08475.
+\bibitem[Bouthillier et al.(2021)]{bouthillier2021} X.~Bouthillier et al. Accounting for variance in machine learning benchmarks. \emph{MLSys}, 2021. arXiv:2103.03098.
+\bibitem[Cameron et al.(2008)]{cameron2008} A.~C. Cameron, J.~B. Gelbach, and D.~L. Miller. Bootstrap-based improvements for inference with clustered errors. \emph{The Review of Economics and Statistics}, 90(3):414--427, 2008.
+\bibitem[Casademunt et al.(2025)]{casademunt2025} H.~Casademunt, C.~Juang, A.~Karvonen, S.~Marks, S.~Rajamanoharan, and N.~Nanda. Steering out-of-distribution generalization with concept ablation fine-tuning. arXiv:2507.16795, 2025.
+\bibitem[Chen et al.(2024)]{chen2024sudden} A.~Chen, R.~Shwartz-Ziv, K.~Cho, M.~L. Leavitt, and N.~Saphra. Sudden drops in the loss: Syntax acquisition, phase transitions, and simplicity bias in MLMs. \emph{ICLR}, 2024. arXiv:2309.07311.
+\bibitem[Chen et al.(2025)]{chen2025persona} R.~Chen, A.~Arditi, H.~Sleight, O.~Evans, and J.~Lindsey. Persona vectors: Monitoring and controlling character traits in language models. arXiv:2507.21509, 2025.
+\bibitem[Clark et al.(2019)]{clark2019} C.~Clark, M.~Yatskar, and L.~Zettlemoyer. Don't take the easy way out: Ensemble based methods for avoiding known dataset biases. \emph{EMNLP}, 2019. arXiv:1909.03683.
+\bibitem[Deng et al.(2026)]{deng2026} Y.~Deng, J.~Liu, K.~Tan, and Y.~Liu. Early learning shapes later directions of representation change in continual learning. arXiv:2609.36081, 2026.
+\bibitem[Deshpande et al.(2021)]{deshpande2021} A.~Deshpande, A.~Achille, A.~Ravichandran, H.~Li, L.~Zancato, C.~Fowlkes, R.~Bhotika, S.~Soatto, and P.~Perona. A linearized framework and a new benchmark for model selection for fine-tuning. arXiv:2102.00084, 2021.
+\bibitem[Dodge et al.(2020)]{dodge2020} J.~Dodge, G.~Ilharco, R.~Schwartz, A.~Farhadi, H.~Hajishirzi, and N.~A. Smith. Fine-tuning pretrained language models: Weight initializations, data orders, and early stopping. arXiv:2002.06305, 2020.
+\bibitem[Dohare et al.(2024)]{dohare2024} S.~Dohare, J.~F. Hernandez-Garcia, Q.~Lan, P.~Rahman, A.~R. Mahmood, and R.~S. Sutton. Loss of plasticity in deep continual learning. \emph{Nature}, 632:768--774, 2024.
+\bibitem[Finn and Levine(2018)]{finn2018universality} C.~Finn and S.~Levine. Meta-learning and universality: Deep representations and gradient descent can approximate any learning algorithm. \emph{ICLR}, 2018. arXiv:1710.11622.
+\bibitem[Geiger et al.(2024)]{geiger2024das} A.~Geiger, Z.~Wu, C.~Potts, T.~Icard, and N.~D. Goodman. Finding alignments between interpretable causal variables and distributed neural representations. \emph{CLeaR}, 2024. arXiv:2303.02536.
+\bibitem[Goudar et al.(2023)]{goudar2023} V.~Goudar, B.~Peysakhovich, D.~J. Freedman, E.~A. Buffalo, and X.-J. Wang. Schema formation in a neural population subspace underlies learning-to-learn in flexible sensorimotor problem-solving. \emph{Nature Neuroscience}, 26(5):879--890, 2023.
+\bibitem[Guan et al.(2026)]{guan2026} J.~Guan, Y.~Yang, Z.~Liu, Y.~Zhang, F.~Meng, and J.~Feng. Active adaptation, not static defense: Temporal dynamics of preventative steering in adversarial fine-tuning. arXiv:2609.10142, 2026.
+\bibitem[Harlow(1949)]{harlow1949} H.~F. Harlow. The formation of learning sets. \emph{Psychological Review}, 56(1):51--65, 1949.
+\bibitem[Jacot et al.(2018)]{jacot2018} A.~Jacot, F.~Gabriel, and C.~Hongler. Neural tangent kernel: Convergence and generalization in neural networks. \emph{NeurIPS}, 2018. arXiv:1806.07572.
+\bibitem[Kornblith et al.(2019)]{kornblith2019} S.~Kornblith, M.~Norouzi, H.~Lee, and G.~Hinton. Similarity of neural network representations revisited. \emph{ICML}, 2019. arXiv:1905.00414.
+\bibitem[Krasheninnikov et al.(2024)]{krasheninnikov2024} D.~Krasheninnikov, E.~Krasheninnikov, B.~Mlodozeniec, T.~Maharaj, and D.~Krueger. Implicit meta-learning may lead language models to trust more reliable sources. \emph{ICML}, PMLR 235:25534--25559, 2024.
+\bibitem[Kumar et al.(2022)]{kumar2022} A.~Kumar, A.~Raghunathan, R.~Jones, T.~Ma, and P.~Liang. Fine-tuning can distort pretrained features and underperform out-of-distribution. \emph{ICLR}, 2022. arXiv:2202.10054.
+\bibitem[Lieberum et al.(2023)]{lieberum2023} T.~Lieberum, M.~Rahtz, J.~Kram\'ar, N.~Nanda, G.~Irving, R.~Shah, and V.~Mikulik. Does circuit analysis interpretability scale? Evidence from multiple choice capabilities in Chinchilla. arXiv:2307.09458, 2023.
+\bibitem[Lyle et al.(2023)]{lyle2023} C.~Lyle, Z.~Zheng, E.~Nikishin, B.~Avila Pires, R.~Pascanu, and W.~Dabney. Understanding plasticity in neural networks. \emph{ICML}, 2023. arXiv:2303.01486.
+\bibitem[Makelov et al.(2024)]{makelov2024} A.~Makelov, G.~Lange, A.~Geiger, and N.~Nanda. Is this the subspace you are looking for? An interpretability illusion for subspace activation patching. \emph{ICLR}, 2024. arXiv:2311.17030.
+\bibitem[Malladi et al.(2023)]{malladi2023} S.~Malladi, A.~Wettig, D.~Yu, D.~Chen, and S.~Arora. A kernel-based view of language model fine-tuning. \emph{ICML}, 2023. arXiv:2210.05643.
+\bibitem[Maor et al.(2026)]{maor2026} I.~Maor et al. Persistent representation of a prior schema in the orbitofrontal cortex facilitates learning of a conflicting schema. \emph{Nature Communications}, 17, 2026. doi:10.1038/s41467-026-69330-2.
+\bibitem[Mei et al.(2020)]{mei2020} J.~Mei, C.~Xiao, C.~Szepesv\'ari, and D.~Schuurmans. On the global convergence rates of softmax policy gradient methods. \emph{ICML}, 2020. arXiv:2005.06392.
+\bibitem[Mosbach et al.(2021)]{mosbach2021} M.~Mosbach, M.~Andriushchenko, and D.~Klakow. On the stability of fine-tuning BERT: Misconceptions, explanations, and strong baselines. \emph{ICLR}, 2021. arXiv:2006.04884.
+\bibitem[Ortiz-Jim\'enez et al.(2021)]{ortizjimenez2021} G.~Ortiz-Jim\'enez, S.-M. Moosavi-Dezfooli, and P.~Frossard. What can linearized neural networks actually say about generalization? \emph{NeurIPS}, 2021. arXiv:2106.06770.
+\bibitem[Owen(2007)]{owen2007pigeonhole} A.~B. Owen. The pigeonhole bootstrap. \emph{The Annals of Applied Statistics}, 1(2):386--411, 2007.
+\bibitem[Prakash et al.(2024)]{prakash2024} N.~Prakash, T.~Rott Shaham, T.~Haklay, Y.~Belinkov, and D.~Bau. Fine-tuning enhances existing mechanisms: A case study on entity tracking. \emph{ICLR}, 2024. arXiv:2402.14811.
+\bibitem[Raghu et al.(2020)]{raghu2020} A.~Raghu, M.~Raghu, S.~Bengio, and O.~Vinyals. Rapid learning or feature reuse? Towards understanding the effectiveness of MAML. \emph{ICLR}, 2020. arXiv:1909.09157.
+\bibitem[Ren and Sutherland(2025)]{ren2025} Y.~Ren and D.~J. Sutherland. Learning dynamics of LLM finetuning. \emph{ICLR}, 2025. arXiv:2407.10490.
+\bibitem[Singh et al.(2025)]{singh2025coopetition} A.~K. Singh, T.~Moskovitz, S.~Dragutinovi\'c, F.~Hill, S.~C.~Y. Chan, and A.~M. Saxe. Strategy coopetition explains the emergence and transience of in-context learning. \emph{ICML}, 2025. arXiv:2503.05631.
+\bibitem[Tse et al.(2007)]{tse2007} D.~Tse, R.~F. Langston, M.~Kakeyama, I.~Bethus, P.~A. Spooner, E.~R. Wood, M.~P. Witter, and R.~G.~M. Morris. Schemas and memory consolidation. \emph{Science}, 316(5821):76--82, 2007.
+\bibitem[Wiegreffe et al.(2025)]{wiegreffe2025} S.~Wiegreffe, O.~Tafjord, Y.~Belinkov, H.~Hajishirzi, and A.~Sabharwal. Answer, assemble, ace: Understanding how LMs answer multiple choice questions. \emph{ICLR}, 2025. arXiv:2407.15018.
+\bibitem[Yang et al.(2026)]{yang2026} Z.~Yang, Z.~Zhao, W.~Tang, X.~Jiang, Y.~Liu, T.~Chen, Z.~Yu, and J.~Liu. Training trajectories determine circuit removability in annealable soft-prior transformers. arXiv:2609.10287, 2026.
+\end{thebibliography}
+
+\appendix
+\section{Preregistration and Deviations}\label{app:prereg}
+\begin{itemize}
+\item[D1] The KL anchor uses a proper four-letter KL, with the mass term computed on the raw output. The original form overflows under output offsets. Found in a smoke test and applied to all arms before any Stage-2 result.
+\item[D2] Option-token sites were added to Stage 0, after a smoke test showed the final-position candidates were letter readouts.
+\item[D3] Flip and copy rates are measured as excess over unpatched pairs. An inert patch has a raw copy rate of 0.22 by chance.
+\item[D4] Adaptive light Stage 0 for adapters 2--6: whole-residual swaps bound any subspace swap.
+\item[D5] An analysis-script crash fixed: an unused required argument; no logic changed.
+\item[D6] Stage 3 was stopped by the author during its pilot. No Stage-3 result is reported.
+\item[E1, E2] Exploratory, logged before running: the learning-rate benchmark, the start $\times$ network factorial, and the saturation test (reading rule written before the run).
+\item[E3] Post hoc, written after all Stage-2 results were read: the four-run reference, the three-way bootstrap, $t$ intervals and permutation tests, the decomposition of the E2 interaction, and the scaffold contrasts against the reference (Section~\ref{sec:robust}).
+\item[E4] Post hoc: the preregistered forecast computed by a saved script, and the adapter-level ranking of $\Delta_K$ by $t=0$ kernel statistics.
+\end{itemize}
+Pilot budgets were set by the frozen rule: the smallest number of passes at which base reached balanced accuracy $\ge0.85$ on one or two of three pilot seeds. This gave one pass for B\_ind and three for B\_ext. Output-matching exactness was $\le 8\times10^{-6}$ in every cell.
+
+\section{Training and Evaluation Details}\label{app:details}
+\begin{itemize}
+\item \textbf{Update (frozen recipe v1).} Exact policy gradient over the four letters with rewards $\pm1$ per letter; policy temperature $\tau=2$; $\epsilon=0.1$ uniform mixture on the policy weights; moving-average baseline (decay 0.9); mass term weight $0.1$, on the raw letter output; KL anchor weight $0.03$ (four-letter KL, D1); Adam, learning rate $5\times10^{-4}$; batch 4; gradient-norm clip 1.0.
+\item \textbf{Adapters.} Hand-written LoRA, rank 8, $\alpha=16$ (scale 2), on the query and value projections of every layer. $\phi$ is initialised from the $B$ seed and is identical across arms.
+\item \textbf{$B$ data.} Per $B$ seed: 192 training situations (fixed order), 96 held-out evaluation situations and 96 shifted-distribution situations, all generated from the $B$ seed alone. $G$ averages balanced accuracy at eight evenly spaced points over the budget (every 24 situations on B\_ind, every 72 on B\_ext), excluding $t=0$.
+\item \textbf{$A$ adapters.} Six designated adapters from three training series (ST2\_20260919, ST2\_20260921, ST2\_20260922, ST2b\_20260920, P1\_20260923, P1\_20260924); P1\_20260925--28 are held out for confirmation.
+\item \textbf{Controls.} shuf, single and perm adapters were trained (or, for perm, constructed) for seeds 20260919, 20260921 and 20260922, the same seeds as the first three $A$ adapters.
+\end{itemize}
+
+\section{Per-Adapter Results}\label{app:peradapter}
+\begin{table}[H]\centering\small
+\begin{tabular}{lrrrrrrrr}
+\toprule
+& \multicolumn{4}{c}{B\_ind} & \multicolumn{4}{c}{B\_ext}\\
+\cmidrule(lr){2-5}\cmidrule(lr){6-9}
+$A$ adapter & $\Delta_{\text{raw}}$ & $\Delta_{\text{start}}$ & $\Delta_K$ & $S$ & $\Delta_{\text{raw}}$ & $\Delta_{\text{start}}$ & $\Delta_K$ & $S$\\
+\midrule
+\tabinput{tab_peradapter.tex}
+\bottomrule
+\end{tabular}
+\caption{Preregistered contrasts per $A$ adapter (against the single base run), averaged over $B$ seeds 101--103 (Qwen3-1.7B).}
+\end{table}
+
+\section{Reference Runs}\label{app:refruns}
+\begin{table}[H]\centering\small
+\begin{tabular}{llrrrrrrrr}
+\toprule
+& & \multicolumn{4}{c}{$G$} & \multicolumn{4}{c}{final accuracy}\\
+\cmidrule(lr){3-6}\cmidrule(lr){7-10}
+Task & seed & base & perm\,19 & perm\,21 & perm\,22 & base & perm\,19 & perm\,21 & perm\,22\\
+\midrule
+\tabinput{tab_refruns.tex}
+\bottomrule
+\end{tabular}
+\caption{The four reference runs per $B$ seed: base and the output-matched perm controls (near-inert perturbations of base). Within-seed SD of $G$: 0.027 (B\_ind), 0.077 (B\_ext); of final accuracy: 0.074 and 0.194.}
+\end{table}
+
+\section{Control Adapters}\label{app:controls}
+\begin{table}[H]\centering\small
+\begin{tabular}{lrrrr}
+\toprule
+Control & software accuracy & letter KL to base & $\Delta_K$ B\_ind & $\Delta_K$ B\_ext\\
+\midrule
+\tabinput{tab_controls.tex}
+\bottomrule
+\end{tabular}
+\caption{Control adapters, trained with the same recipe as $A$. \emph{Software accuracy} is meaning accuracy on fresh items under $A$'s rule (base 0.516, every $A$ adapter 1.000); a single-cue policy scores 0.75. \emph{Letter KL} is KL(control$\,\|\,$base) over the four letters on the same items ($A$ adapter 1: 10.35). For a saturated adapter it measures disagreement with base, not saturation: the three single controls make identical choices and so have identical KL. Saturation, as the mean $|\delta|$: $A$ 75--82 nats, shuf 61--75, single 74--77, perm 0.6--1.5. $\Delta_K$ is the output-matched learning advantage over the single base run.}
+\end{table}
+
+\section{Stage 0 Detail}\label{app:stage0}
+Each $A$ adapter was tested on 32 fresh situations per domain $\times$ 4 option rotations (fit on plant and clinic, test on software). Base meaning accuracy was 0.504 (fit) and 0.516 (test); every adapter scored 1.000 on both.
+
+Adapter 1 (ST2\_20260919) ran the full candidate set at every site and layer: top-4 PCs of $A$'s delta; letter-residualised PCs ($k=2,4,16$); a class-mean decision direction; random subspaces ($k=1,4$); the base model's letter-identity subspace; and the whole residual. Adapters 2--6 ran the whole-residual swap at every site, plus the top-4 PCs at the final position. Their runs crashed in a final control step after every site had been logged. Their patching results are recovered from the logs, which record the fit domains only, so the software-domain confirmation exists for adapter 1 alone. A full candidate set would have been run wherever a whole-residual swap moved meaning by $\ge 0.2$; this never happened.
+
+Excess meaning-flip was 0.00 for every candidate, site and layer on all six adapters. At the final position, excess letter-copy was 0.00 at layer 16; 0.00--0.43 at layer 20 (varying by adapter); and 0.64 at layers 24 and 26, with the top-4 subspace identical to the whole residual.
+
+\section{Tangent-Kernel Statistics at the Start of $B$}\label{app:kernel}
+\begin{table}[H]\centering\small
+\begin{tabular}{llrrrr}
+\toprule
+Task & Network & kernel scale & $F_{\text{res}}$ & $F_{\text{sign}}$ & item-type CKA\\
+\midrule
+\tabinput{tab_kernel.tex}
+\bottomrule
+\end{tabular}
+\caption{Empirical tangent kernel of the fresh $B$ adapter on $B$'s 192 training prompts, measured before any update ($B$ seed 101). The output is the log-probability of the correct letter in each arm's frame. Kernel scale is the mean diagonal of $JJ^\top$. $F_{\text{res}}=d^\top K d/(\lVert d\rVert^2\,\overline{\mathrm{diag}\,K})$ with $d_i=1-q_i$, for the plain gradient kernel; $F_{\text{sign}}$ is the same statistic for the sign-gradient kernel, which approximates Adam's update. CKA is computed against the item-type indicator kernel. Ranges are over adapters.}
+\end{table}
+
+\section{Process-Only Control: Calibration}\label{app:pc}
+\begin{table}[H]\centering\small
+\begin{tabular}{lrr}
+\toprule
+Amplification factor & mean $G$ gain over base, B\_ind & B\_ext\\
+\midrule
+\tabinput{tab_pccalib.tex}
+\bottomrule
+\end{tabular}
+\caption{The preregistered process-only control. Its forward pass is base's, and after each step the update's component in an 8-dimensional calibration-gradient subspace is amplified. The preregistered rule required $\ge0.10$ on both tasks; no factor qualified. Calibration used pilot seeds 1--3, each against a single base run.}
+\end{table}
+
+\section{Frozen Forecast for the Held-Out Adapters}\label{app:forecast}
+Four $A$ adapters (P1\_20260925--28) were designated as a held-out confirmation set in the Stage-1 preregistration and have never been used for $B$ learning. Their far-domain transfer is 0.976--0.990, like the six used adapters. Before any $B$-learning run on them, we measured $F_{\text{sign}}$ in the output-matched frame at $t=0$ ($B$ seed 101, as for the six; E5) and froze the forecast below in \texttt{FSIGN\_FORECAST.md} (sha256 \texttt{\tabinput{forecast_sha.tex}}), registered as Zenodo record doi:\forecastdoi.
+
+\begin{table}[H]\centering\small
+\begin{tabular}{lrrrr}
+\toprule
+Held-out adapter & $F_{\text{sign}}$, B\_ind & $F_{\text{sign}}$, B\_ext & predicted rank, B\_ind & predicted rank, B\_ext\\
+\midrule
+\tabinput{tab_forecast.tex}
+\bottomrule
+\end{tabular}
+\caption{The frozen forecast. Rank 1 is the largest predicted $\Delta_K$. The test, the analysis and the replicated-reference design are specified in \texttt{FSIGN\_FORECAST.md}.}
+\end{table}
+
+\section{Environment}\label{app:env}
+\begin{itemize}
+\item Model: Qwen3-1.7B (Hugging Face snapshot \texttt{70d244cc}), bf16, with hand-written rank-8 LoRA on the query and value projections (scale 2).
+\item Hardware and software: one laptop RTX 5070 (8 GB); torch 2.7.1+cu128; transformers 5.16.1.
+\item Run times: a $B$-learning arm took 20--120\,s, and the Stage-2 grid about 6\,h of GPU time.
+\item Determinism: an identical configuration reproduced $G$ exactly (replicate difference 0.000). Near-inert changes to the weights do not (Section~\ref{sec:noise}).
+\end{itemize}
+\end{document}

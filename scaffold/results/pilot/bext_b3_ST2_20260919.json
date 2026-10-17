@@ -1,0 +1,421 @@
+{
+ "rule": "bext",
+ "bseed": 3,
+ "adapter": "ST2_20260919",
+ "passes": 6,
+ "n_train": 192,
+ "n_eval": 96,
+ "arms": {
+  "base": {
+   "t0": {
+    "bal": 0.5,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 0.0,
+     "nm_infra": 0.0,
+     "nm_desk": 0.0
+    },
+    "acc": 0.5
+   },
+   "trace": [
+    {
+     "bal": 0.5104166666666666,
+     "by_type": {
+      "pos": 0.4791666666666667,
+      "nm_time": 0.625,
+      "nm_infra": 0.5,
+      "nm_desk": 0.5
+     },
+     "seen": 96,
+     "grad_norm": 3.824017286300659,
+     "vind": 0.75
+    },
+    {
+     "bal": 0.5625,
+     "by_type": {
+      "pos": 0.5833333333333334,
+      "nm_time": 0.625,
+      "nm_infra": 0.5625,
+      "nm_desk": 0.4375
+     },
+     "seen": 192,
+     "grad_norm": 1.3030803203582764,
+     "vind": 0.75
+    },
+    {
+     "bal": 0.5,
+     "by_type": {
+      "pos": 0.0,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 288,
+     "grad_norm": 1.6223955154418945,
+     "vind": 0.5
+    },
+    {
+     "bal": 0.4895833333333333,
+     "by_type": {
+      "pos": 0.041666666666666664,
+      "nm_time": 0.9375,
+      "nm_infra": 0.9375,
+      "nm_desk": 0.9375
+     },
+     "seen": 384,
+     "grad_norm": 2.2822418212890625,
+     "vind": 1.674978863432653e-20
+    },
+    {
+     "bal": 0.5104166666666666,
+     "by_type": {
+      "pos": 0.4166666666666667,
+      "nm_time": 0.6875,
+      "nm_infra": 0.625,
+      "nm_desk": 0.5
+     },
+     "seen": 480,
+     "grad_norm": 16.293596267700195,
+     "vind": 0.7499899864196777
+    },
+    {
+     "bal": 0.5104166666666666,
+     "by_type": {
+      "pos": 0.5625,
+      "nm_time": 0.625,
+      "nm_infra": 0.375,
+      "nm_desk": 0.375
+     },
+     "seen": 576,
+     "grad_norm": 7.222316741943359,
+     "vind": 0.75
+    },
+    {
+     "bal": 0.5104166666666666,
+     "by_type": {
+      "pos": 0.4166666666666667,
+      "nm_time": 0.6875,
+      "nm_infra": 0.625,
+      "nm_desk": 0.5
+     },
+     "seen": 672,
+     "grad_norm": 1.5923206806182861,
+     "vind": 0.5
+    },
+    {
+     "bal": 0.5520833333333333,
+     "by_type": {
+      "pos": 0.5416666666666666,
+      "nm_time": 0.6875,
+      "nm_infra": 0.5,
+      "nm_desk": 0.5
+     },
+     "seen": 768,
+     "grad_norm": 1.8566275835037231,
+     "vind": 0.75
+    },
+    {
+     "bal": 0.48958333333333337,
+     "by_type": {
+      "pos": 0.5208333333333334,
+      "nm_time": 0.625,
+      "nm_infra": 0.375,
+      "nm_desk": 0.375
+     },
+     "seen": 864,
+     "grad_norm": 4.534658908843994,
+     "vind": 0.7499604225158691
+    },
+    {
+     "bal": 0.5,
+     "by_type": {
+      "pos": 0.5208333333333334,
+      "nm_time": 0.6875,
+      "nm_infra": 0.375,
+      "nm_desk": 0.375
+     },
+     "seen": 960,
+     "grad_norm": 2.8344151973724365,
+     "vind": 0.75
+    },
+    {
+     "bal": 0.5208333333333334,
+     "by_type": {
+      "pos": 0.3333333333333333,
+      "nm_time": 0.875,
+      "nm_infra": 0.6875,
+      "nm_desk": 0.5625
+     },
+     "seen": 1056,
+     "grad_norm": 10.274500846862793,
+     "vind": 0.5
+    },
+    {
+     "bal": 0.84375,
+     "by_type": {
+      "pos": 0.8958333333333334,
+      "nm_time": 1.0,
+      "nm_infra": 0.5625,
+      "nm_desk": 0.8125
+     },
+     "seen": 1152,
+     "grad_norm": 9.44388198852539,
+     "vind": 0.75
+    }
+   ],
+   "final_own": {
+    "bal": 0.84375,
+    "by_type": {
+     "pos": 0.8958333333333334,
+     "nm_time": 1.0,
+     "nm_infra": 0.5625,
+     "nm_desk": 0.8125
+    },
+    "acc": 0.84375
+   },
+   "final_own_shift": {
+    "bal": 0.9270833333333333,
+    "by_type": {
+     "pos": 0.9375,
+     "nm_time": 1.0,
+     "nm_infra": 0.8125,
+     "nm_desk": 0.9375
+    },
+    "acc": 0.9270833333333334
+   },
+   "scaffold": {
+    "bal": 0.84375,
+    "by_type": {
+     "pos": 0.8958333333333334,
+     "nm_time": 1.0,
+     "nm_infra": 0.5625,
+     "nm_desk": 0.8125
+    },
+    "acc": 0.84375
+   },
+   "scaffold_shift": {
+    "bal": 0.9270833333333333,
+    "by_type": {
+     "pos": 0.9375,
+     "nm_time": 1.0,
+     "nm_infra": 0.8125,
+     "nm_desk": 0.9375
+    },
+    "acc": 0.9270833333333334
+   },
+   "G": 0.5416666666666666,
+   "seconds": 120.70716571807861
+  },
+  "A_raw": {
+   "t0": {
+    "bal": 0.7916666666666667,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 1.0,
+     "nm_infra": 0.5,
+     "nm_desk": 0.25
+    },
+    "acc": 0.7916666666666666
+   },
+   "trace": [
+    {
+     "bal": 0.9583333333333333,
+     "by_type": {
+      "pos": 0.9791666666666666,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 0.8125
+     },
+     "seen": 96,
+     "grad_norm": 0.5006476640701294,
+     "vind": 0.75
+    },
+    {
+     "bal": 1.0,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 192,
+     "grad_norm": 1.962835431098938,
+     "vind": 1.0
+    },
+    {
+     "bal": 1.0,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 288,
+     "grad_norm": 0.5607478618621826,
+     "vind": 1.0
+    },
+    {
+     "bal": 1.0,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 384,
+     "grad_norm": 0.556958019733429,
+     "vind": 1.0
+    },
+    {
+     "bal": 1.0,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 480,
+     "grad_norm": 0.6192466616630554,
+     "vind": 1.0
+    },
+    {
+     "bal": 1.0,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 576,
+     "grad_norm": 0.4546230435371399,
+     "vind": 1.0
+    },
+    {
+     "bal": 1.0,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 672,
+     "grad_norm": 2.2704663276672363,
+     "vind": 1.0
+    },
+    {
+     "bal": 1.0,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 768,
+     "grad_norm": 0.4170134365558624,
+     "vind": 1.0
+    },
+    {
+     "bal": 1.0,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 864,
+     "grad_norm": 1.6117266416549683,
+     "vind": 1.0
+    },
+    {
+     "bal": 1.0,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 960,
+     "grad_norm": 1.6848646402359009,
+     "vind": 1.0
+    },
+    {
+     "bal": 1.0,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 1056,
+     "grad_norm": 1.2747267484664917,
+     "vind": 1.0
+    },
+    {
+     "bal": 1.0,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 1152,
+     "grad_norm": 0.9766961932182312,
+     "vind": 1.0
+    }
+   ],
+   "final_own": {
+    "bal": 1.0,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 1.0,
+     "nm_infra": 1.0,
+     "nm_desk": 1.0
+    },
+    "acc": 1.0
+   },
+   "final_own_shift": {
+    "bal": 1.0,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 1.0,
+     "nm_infra": 1.0,
+     "nm_desk": 1.0
+    },
+    "acc": 1.0
+   },
+   "scaffold": {
+    "bal": 0.5208333333333333,
+    "by_type": {
+     "pos": 0.9791666666666666,
+     "nm_time": 0.0,
+     "nm_infra": 0.0625,
+     "nm_desk": 0.125
+    },
+    "acc": 0.5208333333333334
+   },
+   "scaffold_shift": {
+    "bal": 0.53125,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 0.0625,
+     "nm_infra": 0.0625,
+     "nm_desk": 0.0625
+    },
+    "acc": 0.53125
+   },
+   "G": 0.9965277777777778,
+   "seconds": 119.99301481246948
+  }
+ },
+ "prereg_sha": "37506f0cc5994493aaeb8eb805b18d978a2c8218bc8692d21d3ce96607b65fdc",
+ "t0": {
+  "base_eval": 0.5,
+  "A_eval": 0.7916666666666667,
+  "A_minus_base_lp_absmean": 76.48857116699219
+ },
+ "exactness": {
+  "phi_zero_maxdiff": 0.0,
+  "matched_vs_base_maxdiff": 5.224486812949181e-06
+ },
+ "seconds": 272.8470549583435
+}

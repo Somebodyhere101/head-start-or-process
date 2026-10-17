@@ -1,0 +1,1 @@
+[    23s] {"kind": "perm", "seed": 20260921, "software_interpret_meaning_acc": {"base": 0.515625, "control": 0.515625, "A": 1.0}, "normalised_letter_kl_to_base": {"control": 0.01199091412127018, "A": 10.351614952087402}, "final_vindicated": null, "seconds": 23.435658931732178}

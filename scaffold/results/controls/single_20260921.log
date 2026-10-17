@@ -1,0 +1,3 @@
+[    14s] single_20260921: 384 situations, common rate 0.500 (rule infra)
+[    14s] single_20260921: 384 situations, common rate 0.500 (rule infra)
+[   231s] {"kind": "single", "seed": 20260921, "software_interpret_meaning_acc": {"base": 0.515625, "control": 0.75, "A": 1.0}, "normalised_letter_kl_to_base": {"control": 5.749075889587402, "A": 10.351614952087402}, "final_vindicated": {"interpret": 1.0, "pursue": 1.0}, "seconds": 230.73257970809937}

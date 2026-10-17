@@ -1,0 +1,22 @@
+{
+ "rule": "bind",
+ "bseed": 101,
+ "adapter": "results\\controls\\single_20260921.pt",
+ "arms": {
+  "A_matched": {
+   "F_res": 8.11069755844977,
+   "F_sign": 48.66253838855736,
+   "CKA_type": 0.04735387861728668,
+   "raw_scale": 216621.296875,
+   "mean_residual": 0.49503660202026367
+  },
+  "A_raw": {
+   "F_res": 6.027957240253511,
+   "F_sign": 46.54246937450273,
+   "CKA_type": 0.029355565086007118,
+   "raw_scale": 156583.046875,
+   "mean_residual": 0.46875
+  }
+ },
+ "seconds": 63.9239068031311
+}

@@ -1,0 +1,4 @@
+[    24s] cell bind_b2_ST2_20260919: t0 balanced base 0.510, A 0.583
+[    29s] exactness: zero-phi max |dlp| 0.00e+00, matched vs base max |dlp| 6.81e-06
+[    87s] PC_H2        t0 0.510 -> final 0.510 | G 0.510 | scaffold 0.510 | shift own 0.490 | curve [0.5, 0.5, 0.5, 0.52, 0.53, 0.5, 0.52, 0.51] | 58 s
+[    87s] done in 87 s

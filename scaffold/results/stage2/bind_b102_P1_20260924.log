@@ -1,0 +1,7 @@
+[    24s] cell bind_b102_P1_20260924: t0 balanced base 0.500, A 0.583
+[    29s] exactness: zero-phi max |dlp| 0.00e+00, matched vs base max |dlp| 6.13e-06
+[    79s] A_raw        t0 0.583 -> final 0.750 | G 0.725 | scaffold 0.531 | shift own 0.750 | curve [0.64, 0.62, 0.77, 0.76, 0.76, 0.75, 0.75, 0.75] | 50 s
+[   129s] prior        t0 0.583 -> final 0.583 | G 0.583 | scaffold 0.708 | shift own 0.562 | curve [0.58, 0.58, 0.58, 0.58, 0.58, 0.58, 0.58, 0.58] | 50 s
+[   179s] A_matched    t0 0.500 -> final 0.656 | G 0.564 | scaffold 0.500 | shift own 0.667 | curve [0.51, 0.5, 0.51, 0.52, 0.57, 0.59, 0.65, 0.66] | 50 s
+[   302s] A_matched_fade t0 0.500 -> final 0.896 | G 0.618 | scaffold 0.896 | shift own 0.865 | curve [0.51, 0.5, 0.51, 0.51, 0.6, 0.67, 0.73, 0.92] | 122 s
+[   302s] done in 302 s

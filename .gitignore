@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# weights are in the v1.0 release, not in git
+*.pt
+*.zip
+
+# LaTeX build files
+*.aux
+*.log
+!scaffold/results/**/*.log
+*.out
+*.synctex.gz
+scaffold/paper/main.pdf

@@ -1,0 +1,22 @@
+{
+ "rule": "bext",
+ "bseed": 101,
+ "adapter": "results\\controls\\single_20260919.pt",
+ "arms": {
+  "A_matched": {
+   "F_res": 10.939449582857046,
+   "F_sign": 56.07507624184139,
+   "CKA_type": 0.05946959927678108,
+   "raw_scale": 660876.5,
+   "mean_residual": 0.4972752332687378
+  },
+  "A_raw": {
+   "F_res": 0.8557570377258524,
+   "F_sign": 3.7588249751561134,
+   "CKA_type": 0.03153029829263687,
+   "raw_scale": 759220.75,
+   "mean_residual": 0.4166666567325592
+  }
+ },
+ "seconds": 63.718915939331055
+}

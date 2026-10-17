@@ -1,0 +1,23 @@
+[2026-10-16T14:10:14] prep start
+[2026-10-16T22:37:46] stage0 chain finished
+[2026-10-16T23:12:03] start control perm 20260919
+[2026-10-16T23:12:32] end control perm 20260919 exit 0
+[2026-10-16T23:13:17] start control perm 20260921
+[2026-10-16T23:13:45] end control perm 20260921 exit 0
+[2026-10-16T23:14:31] start control perm 20260922
+[2026-10-16T23:14:55] end control perm 20260922 exit 0
+[2026-10-16T23:17:42] start control shuf 20260919
+[2026-10-16T23:17:59] end control shuf 20260919 exit 1
+[2026-10-16T23:18:14] start control shuf 20260921
+[2026-10-16T23:18:30] end control shuf 20260921 exit 1
+[2026-10-16T23:22:47] start control shuf 20260922
+[2026-10-16T23:23:04] end control shuf 20260922 exit 1
+[2026-10-16T23:23:19] start control single 20260919
+[2026-10-16T23:23:39] end control single 20260919 exit 1
+[2026-10-16T23:26:25] start control single 20260921
+[2026-10-16T23:26:43] end control single 20260921 exit 1
+[2026-10-16T23:26:58] start control single 20260922
+[2026-10-16T23:27:15] end control single 20260922 exit 1
+[2026-10-16T23:27:30] start smoke2
+[2026-10-16T23:28:52] end smoke2 exit 0
+[2026-10-16T23:28:52] PREP DONE

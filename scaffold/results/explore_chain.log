@@ -1,0 +1,150 @@
+[2026-10-17T06:32:52] start lr bind_b101_ST2_20260919
+[2026-10-17T06:35:08] end lr bind_b101_ST2_20260919 exit 0
+[2026-10-17T06:35:23] start lr bext_b101_ST2_20260919
+[2026-10-17T06:38:20] end lr bext_b101_ST2_20260919 exit 0
+[2026-10-17T06:38:35] start lr bind_b102_ST2_20260919
+[2026-10-17T06:40:47] end lr bind_b102_ST2_20260919 exit 0
+[2026-10-17T06:41:02] start lr bext_b102_ST2_20260919
+[2026-10-17T06:44:00] end lr bext_b102_ST2_20260919 exit 0
+[2026-10-17T06:44:15] start lr bind_b103_ST2_20260919
+[2026-10-17T06:46:27] end lr bind_b103_ST2_20260919 exit 0
+[2026-10-17T06:46:42] start lr bext_b103_ST2_20260919
+[2026-10-17T06:49:40] end lr bext_b103_ST2_20260919 exit 0
+[2026-10-17T06:49:55] start rep bind_b101_ST2_20260919
+[2026-10-17T06:51:16] end rep bind_b101_ST2_20260919 exit 0
+[2026-10-17T06:51:32] start rep bext_b101_ST2_20260919
+[2026-10-17T06:53:18] end rep bext_b101_ST2_20260919 exit 0
+[2026-10-17T06:53:33] start forecast bind ST2_20260919
+[2026-10-17T06:55:03] end forecast bind ST2_20260919 exit 0
+[2026-10-17T06:55:19] start forecast bind ST2_20260921
+[2026-10-17T06:56:25] end forecast bind ST2_20260921 exit 0
+[2026-10-17T06:56:40] start forecast bind ST2_20260922
+[2026-10-17T06:57:47] end forecast bind ST2_20260922 exit 0
+[2026-10-17T06:58:02] start forecast bind ST2b_20260920
+[2026-10-17T06:59:08] end forecast bind ST2b_20260920 exit 0
+[2026-10-17T06:59:23] start forecast bind P1_20260923
+[2026-10-17T07:00:29] end forecast bind P1_20260923 exit 0
+[2026-10-17T07:00:44] start forecast bind P1_20260924
+[2026-10-17T07:01:51] end forecast bind P1_20260924 exit 0
+[2026-10-17T07:02:06] start forecast bind shuf_20260919
+[2026-10-17T07:03:15] end forecast bind shuf_20260919 exit 0
+[2026-10-17T07:03:30] start forecast bind shuf_20260921
+[2026-10-17T07:04:37] end forecast bind shuf_20260921 exit 0
+[2026-10-17T07:04:52] start forecast bind shuf_20260922
+[2026-10-17T07:05:59] end forecast bind shuf_20260922 exit 0
+[2026-10-17T07:06:14] start forecast bind single_20260919
+[2026-10-17T07:07:20] end forecast bind single_20260919 exit 0
+[2026-10-17T07:07:35] start forecast bind single_20260921
+[2026-10-17T07:08:42] end forecast bind single_20260921 exit 0
+[2026-10-17T07:08:57] start forecast bind single_20260922
+[2026-10-17T07:10:03] end forecast bind single_20260922 exit 0
+[2026-10-17T07:10:18] start forecast bind perm_20260919
+[2026-10-17T07:11:24] end forecast bind perm_20260919 exit 0
+[2026-10-17T07:11:39] start forecast bind perm_20260921
+[2026-10-17T07:12:46] end forecast bind perm_20260921 exit 0
+[2026-10-17T07:13:01] start forecast bind perm_20260922
+[2026-10-17T07:14:07] end forecast bind perm_20260922 exit 0
+[2026-10-17T07:14:23] start forecast bext ST2_20260919
+[2026-10-17T07:15:52] end forecast bext ST2_20260919 exit 0
+[2026-10-17T07:16:08] start forecast bext ST2_20260921
+[2026-10-17T07:17:14] end forecast bext ST2_20260921 exit 0
+[2026-10-17T07:17:30] start forecast bext ST2_20260922
+[2026-10-17T07:18:37] end forecast bext ST2_20260922 exit 0
+[2026-10-17T07:18:52] start forecast bext ST2b_20260920
+[2026-10-17T07:19:58] end forecast bext ST2b_20260920 exit 0
+[2026-10-17T07:20:13] start forecast bext P1_20260923
+[2026-10-17T07:21:19] end forecast bext P1_20260923 exit 0
+[2026-10-17T07:21:34] start forecast bext P1_20260924
+[2026-10-17T07:22:41] end forecast bext P1_20260924 exit 0
+[2026-10-17T07:22:56] start forecast bext shuf_20260919
+[2026-10-17T07:24:02] end forecast bext shuf_20260919 exit 0
+[2026-10-17T07:24:17] start forecast bext shuf_20260921
+[2026-10-17T07:25:23] end forecast bext shuf_20260921 exit 0
+[2026-10-17T07:25:38] start forecast bext shuf_20260922
+[2026-10-17T07:26:44] end forecast bext shuf_20260922 exit 0
+[2026-10-17T07:26:59] start forecast bext single_20260919
+[2026-10-17T07:28:05] end forecast bext single_20260919 exit 0
+[2026-10-17T07:28:21] start forecast bext single_20260921
+[2026-10-17T07:29:27] end forecast bext single_20260921 exit 0
+[2026-10-17T07:29:42] start forecast bext single_20260922
+[2026-10-17T07:30:48] end forecast bext single_20260922 exit 0
+[2026-10-17T07:31:03] start forecast bext perm_20260919
+[2026-10-17T07:32:10] end forecast bext perm_20260919 exit 0
+[2026-10-17T07:32:25] start forecast bext perm_20260921
+[2026-10-17T07:33:32] end forecast bext perm_20260921 exit 0
+[2026-10-17T07:33:47] start forecast bext perm_20260922
+[2026-10-17T07:34:53] end forecast bext perm_20260922 exit 0
+[2026-10-17T07:34:53] EXPLORE DONE
+[2026-10-17T07:35:14] start E2 bind_b101_shuf_20260919
+[2026-10-17T07:37:28] end E2 bind_b101_shuf_20260919 exit 0
+[2026-10-17T07:37:43] start E2 bind_b101_shuf_20260921
+[2026-10-17T07:39:58] end E2 bind_b101_shuf_20260921 exit 0
+[2026-10-17T07:40:13] start E2 bind_b101_shuf_20260922
+[2026-10-17T07:42:29] end E2 bind_b101_shuf_20260922 exit 0
+[2026-10-17T07:42:44] start E2 bind_b101_single_20260919
+[2026-10-17T07:44:55] end E2 bind_b101_single_20260919 exit 0
+[2026-10-17T07:45:10] start E2 bind_b101_single_20260921
+[2026-10-17T07:47:22] end E2 bind_b101_single_20260921 exit 0
+[2026-10-17T07:47:37] start E2 bind_b101_single_20260922
+[2026-10-17T07:49:48] end E2 bind_b101_single_20260922 exit 0
+[2026-10-17T07:50:03] start E2 bext_b101_shuf_20260919
+[2026-10-17T07:52:59] end E2 bext_b101_shuf_20260919 exit 0
+[2026-10-17T07:53:14] start E2 bext_b101_shuf_20260921
+[2026-10-17T07:56:11] end E2 bext_b101_shuf_20260921 exit 0
+[2026-10-17T07:56:26] start E2 bext_b101_shuf_20260922
+[2026-10-17T07:59:22] end E2 bext_b101_shuf_20260922 exit 0
+[2026-10-17T07:59:37] start E2 bext_b101_single_20260919
+[2026-10-17T08:02:34] end E2 bext_b101_single_20260919 exit 0
+[2026-10-17T08:02:49] start E2 bext_b101_single_20260921
+[2026-10-17T08:05:45] end E2 bext_b101_single_20260921 exit 0
+[2026-10-17T08:06:00] start E2 bext_b101_single_20260922
+[2026-10-17T08:08:57] end E2 bext_b101_single_20260922 exit 0
+[2026-10-17T08:09:12] start E2 bind_b102_shuf_20260919
+[2026-10-17T08:11:22] end E2 bind_b102_shuf_20260919 exit 0
+[2026-10-17T08:11:37] start E2 bind_b102_shuf_20260921
+[2026-10-17T08:13:50] end E2 bind_b102_shuf_20260921 exit 0
+[2026-10-17T08:14:05] start E2 bind_b102_shuf_20260922
+[2026-10-17T08:16:17] end E2 bind_b102_shuf_20260922 exit 0
+[2026-10-17T08:16:32] start E2 bind_b102_single_20260919
+[2026-10-17T08:18:44] end E2 bind_b102_single_20260919 exit 0
+[2026-10-17T08:18:59] start E2 bind_b102_single_20260921
+[2026-10-17T08:21:11] end E2 bind_b102_single_20260921 exit 0
+[2026-10-17T08:21:26] start E2 bind_b102_single_20260922
+[2026-10-17T08:23:38] end E2 bind_b102_single_20260922 exit 0
+[2026-10-17T08:23:53] start E2 bext_b102_shuf_20260919
+[2026-10-17T08:26:49] end E2 bext_b102_shuf_20260919 exit 0
+[2026-10-17T08:27:04] start E2 bext_b102_shuf_20260921
+[2026-10-17T08:30:01] end E2 bext_b102_shuf_20260921 exit 0
+[2026-10-17T08:30:16] start E2 bext_b102_shuf_20260922
+[2026-10-17T08:33:14] end E2 bext_b102_shuf_20260922 exit 0
+[2026-10-17T08:33:29] start E2 bext_b102_single_20260919
+[2026-10-17T08:36:26] end E2 bext_b102_single_20260919 exit 0
+[2026-10-17T08:36:41] start E2 bext_b102_single_20260921
+[2026-10-17T08:39:38] end E2 bext_b102_single_20260921 exit 0
+[2026-10-17T08:39:53] start E2 bext_b102_single_20260922
+[2026-10-17T08:42:50] end E2 bext_b102_single_20260922 exit 0
+[2026-10-17T08:43:05] start E2 bind_b103_shuf_20260919
+[2026-10-17T08:45:20] end E2 bind_b103_shuf_20260919 exit 0
+[2026-10-17T08:45:35] start E2 bind_b103_shuf_20260921
+[2026-10-17T08:47:47] end E2 bind_b103_shuf_20260921 exit 0
+[2026-10-17T08:48:02] start E2 bind_b103_shuf_20260922
+[2026-10-17T08:50:14] end E2 bind_b103_shuf_20260922 exit 0
+[2026-10-17T08:50:29] start E2 bind_b103_single_20260919
+[2026-10-17T08:52:40] end E2 bind_b103_single_20260919 exit 0
+[2026-10-17T08:52:55] start E2 bind_b103_single_20260921
+[2026-10-17T08:55:07] end E2 bind_b103_single_20260921 exit 0
+[2026-10-17T08:55:22] start E2 bind_b103_single_20260922
+[2026-10-17T08:57:33] end E2 bind_b103_single_20260922 exit 0
+[2026-10-17T08:57:48] start E2 bext_b103_shuf_20260919
+[2026-10-17T09:00:44] end E2 bext_b103_shuf_20260919 exit 0
+[2026-10-17T09:00:59] start E2 bext_b103_shuf_20260921
+[2026-10-17T09:03:57] end E2 bext_b103_shuf_20260921 exit 0
+[2026-10-17T09:04:12] start E2 bext_b103_shuf_20260922
+[2026-10-17T09:07:09] end E2 bext_b103_shuf_20260922 exit 0
+[2026-10-17T09:07:25] start E2 bext_b103_single_20260919
+[2026-10-17T09:10:21] end E2 bext_b103_single_20260919 exit 0
+[2026-10-17T09:10:37] start E2 bext_b103_single_20260921
+[2026-10-17T09:13:33] end E2 bext_b103_single_20260921 exit 0
+[2026-10-17T09:13:48] start E2 bext_b103_single_20260922
+[2026-10-17T09:16:44] end E2 bext_b103_single_20260922 exit 0
+[2026-10-17T09:16:44] E2 DONE

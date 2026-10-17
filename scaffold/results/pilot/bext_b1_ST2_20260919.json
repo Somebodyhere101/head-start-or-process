@@ -1,0 +1,421 @@
+{
+ "rule": "bext",
+ "bseed": 1,
+ "adapter": "ST2_20260919",
+ "passes": 6,
+ "n_train": 192,
+ "n_eval": 96,
+ "arms": {
+  "base": {
+   "t0": {
+    "bal": 0.5,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 0.0,
+     "nm_infra": 0.0,
+     "nm_desk": 0.0
+    },
+    "acc": 0.5
+   },
+   "trace": [
+    {
+     "bal": 0.5,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 0.0,
+      "nm_infra": 0.0,
+      "nm_desk": 0.0
+     },
+     "seen": 96,
+     "grad_norm": 2.2830049991607666,
+     "vind": 1.0
+    },
+    {
+     "bal": 0.5520833333333334,
+     "by_type": {
+      "pos": 0.4791666666666667,
+      "nm_time": 0.4375,
+      "nm_infra": 0.8125,
+      "nm_desk": 0.625
+     },
+     "seen": 192,
+     "grad_norm": 5.3021111488342285,
+     "vind": 0.4999999701976776
+    },
+    {
+     "bal": 0.5520833333333334,
+     "by_type": {
+      "pos": 0.4791666666666667,
+      "nm_time": 0.4375,
+      "nm_infra": 0.8125,
+      "nm_desk": 0.625
+     },
+     "seen": 288,
+     "grad_norm": 1.9953076839447021,
+     "vind": 0.75
+    },
+    {
+     "bal": 0.7291666666666667,
+     "by_type": {
+      "pos": 0.8125,
+      "nm_time": 0.5,
+      "nm_infra": 0.875,
+      "nm_desk": 0.5625
+     },
+     "seen": 384,
+     "grad_norm": 49.77745819091797,
+     "vind": 0.6018333435058594
+    },
+    {
+     "bal": 0.5520833333333334,
+     "by_type": {
+      "pos": 0.4791666666666667,
+      "nm_time": 0.4375,
+      "nm_infra": 0.8125,
+      "nm_desk": 0.625
+     },
+     "seen": 480,
+     "grad_norm": 2.1587157249450684,
+     "vind": 0.75
+    },
+    {
+     "bal": 0.875,
+     "by_type": {
+      "pos": 0.9166666666666666,
+      "nm_time": 0.5,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 576,
+     "grad_norm": 26.135915756225586,
+     "vind": 1.0
+    },
+    {
+     "bal": 0.9270833333333333,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 0.5625,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 672,
+     "grad_norm": 2.4490907192230225,
+     "vind": 1.0
+    },
+    {
+     "bal": 0.9479166666666667,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 0.6875,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 768,
+     "grad_norm": 3.344956636428833,
+     "vind": 1.0
+    },
+    {
+     "bal": 0.9583333333333333,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 0.75,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 864,
+     "grad_norm": 3.1588943004608154,
+     "vind": 1.0
+    },
+    {
+     "bal": 0.9479166666666667,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 0.6875,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 960,
+     "grad_norm": 1.9473559856414795,
+     "vind": 1.0
+    },
+    {
+     "bal": 0.96875,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 0.8125,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 1056,
+     "grad_norm": 1.932900309562683,
+     "vind": 1.0
+    },
+    {
+     "bal": 0.9479166666666667,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 0.75,
+      "nm_infra": 1.0,
+      "nm_desk": 0.9375
+     },
+     "seen": 1152,
+     "grad_norm": 3.134296417236328,
+     "vind": 1.0
+    }
+   ],
+   "final_own": {
+    "bal": 0.9479166666666667,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 0.75,
+     "nm_infra": 1.0,
+     "nm_desk": 0.9375
+    },
+    "acc": 0.9479166666666666
+   },
+   "final_own_shift": {
+    "bal": 0.8958333333333333,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 0.75,
+     "nm_infra": 1.0,
+     "nm_desk": 0.625
+    },
+    "acc": 0.8958333333333334
+   },
+   "scaffold": {
+    "bal": 0.9479166666666667,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 0.75,
+     "nm_infra": 1.0,
+     "nm_desk": 0.9375
+    },
+    "acc": 0.9479166666666666
+   },
+   "scaffold_shift": {
+    "bal": 0.8958333333333333,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 0.75,
+     "nm_infra": 1.0,
+     "nm_desk": 0.625
+    },
+    "acc": 0.8958333333333334
+   },
+   "G": 0.7881944444444445,
+   "seconds": 123.50211000442505
+  },
+  "A_raw": {
+   "t0": {
+    "bal": 0.78125,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 1.0,
+     "nm_infra": 0.375,
+     "nm_desk": 0.3125
+    },
+    "acc": 0.78125
+   },
+   "trace": [
+    {
+     "bal": 0.8541666666666667,
+     "by_type": {
+      "pos": 0.7083333333333334,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 96,
+     "grad_norm": 6.82697057723999,
+     "vind": 0.75
+    },
+    {
+     "bal": 1.0,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 192,
+     "grad_norm": 1.10322105884552,
+     "vind": 1.0
+    },
+    {
+     "bal": 1.0,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 288,
+     "grad_norm": 0.47272464632987976,
+     "vind": 1.0
+    },
+    {
+     "bal": 1.0,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 384,
+     "grad_norm": 0.7499502301216125,
+     "vind": 1.0
+    },
+    {
+     "bal": 1.0,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 480,
+     "grad_norm": 1.6487460136413574,
+     "vind": 1.0
+    },
+    {
+     "bal": 1.0,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 576,
+     "grad_norm": 1.5167206525802612,
+     "vind": 1.0
+    },
+    {
+     "bal": 1.0,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 672,
+     "grad_norm": 1.549960970878601,
+     "vind": 1.0
+    },
+    {
+     "bal": 1.0,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 768,
+     "grad_norm": 0.9187020063400269,
+     "vind": 1.0
+    },
+    {
+     "bal": 1.0,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 864,
+     "grad_norm": 0.745780348777771,
+     "vind": 1.0
+    },
+    {
+     "bal": 1.0,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 960,
+     "grad_norm": 1.4711434841156006,
+     "vind": 1.0
+    },
+    {
+     "bal": 1.0,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 1056,
+     "grad_norm": 1.3328218460083008,
+     "vind": 1.0
+    },
+    {
+     "bal": 1.0,
+     "by_type": {
+      "pos": 1.0,
+      "nm_time": 1.0,
+      "nm_infra": 1.0,
+      "nm_desk": 1.0
+     },
+     "seen": 1152,
+     "grad_norm": 2.232712745666504,
+     "vind": 1.0
+    }
+   ],
+   "final_own": {
+    "bal": 1.0,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 1.0,
+     "nm_infra": 1.0,
+     "nm_desk": 1.0
+    },
+    "acc": 1.0
+   },
+   "final_own_shift": {
+    "bal": 1.0,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 1.0,
+     "nm_infra": 1.0,
+     "nm_desk": 1.0
+    },
+    "acc": 1.0
+   },
+   "scaffold": {
+    "bal": 0.53125,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 0.125,
+     "nm_infra": 0.0,
+     "nm_desk": 0.0625
+    },
+    "acc": 0.53125
+   },
+   "scaffold_shift": {
+    "bal": 0.5,
+    "by_type": {
+     "pos": 1.0,
+     "nm_time": 0.0,
+     "nm_infra": 0.0,
+     "nm_desk": 0.0
+    },
+    "acc": 0.5
+   },
+   "G": 0.9878472222222222,
+   "seconds": 123.88534164428711
+  }
+ },
+ "prereg_sha": "37506f0cc5994493aaeb8eb805b18d978a2c8218bc8692d21d3ce96607b65fdc",
+ "t0": {
+  "base_eval": 0.5,
+  "A_eval": 0.78125,
+  "A_minus_base_lp_absmean": 76.41291809082031
+ },
+ "exactness": {
+  "phi_zero_maxdiff": 0.0,
+  "matched_vs_base_maxdiff": 7.510185241699219e-06
+ },
+ "seconds": 280.6192843914032
+}

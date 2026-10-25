@@ -2,7 +2,7 @@
 
 Code, preregistrations and results for **"Head Start or Process? Decomposing How an Experience-Acquired Abstraction Shapes Later Learning in a Small Language Model"** (Sam Ramdan, October 2026).
 
-- Paper: [`scaffold/paper/head-start-or-process.pdf`](scaffold/paper/head-start-or-process.pdf) · Zenodo: [doi:10.5281/zenodo.23432800](https://doi.org/10.5281/zenodo.23432800)
+- Paper: [`scaffold/paper/head-start-or-process.pdf`](scaffold/paper/head-start-or-process.pdf) · Zenodo: [doi:10.5281/zenodo.23646837](https://doi.org/10.5281/zenodo.23646837)
 - Frozen forecast for the four held-out adapters: [`scaffold/FSIGN_FORECAST.md`](scaffold/FSIGN_FORECAST.md) · Zenodo: [doi:10.5281/zenodo.23432798](https://doi.org/10.5281/zenodo.23432798)
 - Weights (not in git): the [v1.0 release](https://github.com/Somebodyhere101/head-start-or-process/releases/tag/v1.0) carries every learned B adapter (`b-adapters-part01-of-09.zip` to `part09`) and the A, control and Stage-0 tensors (`a-and-control-adapters.zip`)
 
@@ -72,13 +72,13 @@ Check them with `sha256sum -c PREREGISTRATIONS_SHA256SUMS` in `scaffold/`. Every
 
 ## Use of AI assistance
 
-Substantial AI assistance was used throughout this project. The question of whether an experience-acquired abstraction changes the process by which a later abstraction is formed, rather than only supplying information, is the author's. An AI system (Claude, Anthropic), working under the author's direction, audited the earlier studies, reviewed the literature, designed the study, wrote the preregistrations and code, ran the experiments and analyses, and drafted the paper. A separate instance of the same system reviewed the draft; that review led to the post hoc analyses E3 and E4. The preregistrations record that the author delegated the design decisions to the AI system. The author directed the work and is responsible for its content.
+Substantial AI assistance was used throughout this project. The research question, whether an abstraction acquired through experience changes the process by which a later abstraction is learned, was formulated by ChatGPT (OpenAI), which presented it as the main idea across the author's earlier conversations with it; those conversations could not be checked. ChatGPT also wrote the research prompt that the author gave to Claude. An AI system (Claude, Anthropic; Claude Opus 5.5 in Claude Code) audited the earlier studies, reviewed the literature, proposed and designed the study, wrote the preregistrations and code, ran the experiments and analyses, and wrote the paper; the preregistrations record that the author delegated the design decisions. A separate Claude instance reviewed the draft at the author's request, which led to the post hoc analyses E3 and E4; a second review, from another Claude conversation that the author passed on, led to further text revisions and to the separate forecast registration (E5). The author decided to run the study, chose to stop its third stage and proceed to the draft, provided the laptop on which it ran, and released the paper, code and data. The author did not independently check the code, analyses or technical claims. The author is responsible for the released content.
 
 ## Citation
 
 See [`CITATION.cff`](CITATION.cff):
 
-> Ramdan, S. (2026). *Head Start or Process? Decomposing How an Experience-Acquired Abstraction Shapes Later Learning in a Small Language Model.* Zenodo. [doi:10.5281/zenodo.23432800](https://doi.org/10.5281/zenodo.23432800)
+> Ramdan, S. (2026). *Head Start or Process? Decomposing How an Experience-Acquired Abstraction Shapes Later Learning in a Small Language Model.* Zenodo. [doi:10.5281/zenodo.23646837](https://doi.org/10.5281/zenodo.23646837)
 
 ## License
 

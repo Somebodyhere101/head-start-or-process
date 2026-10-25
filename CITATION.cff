@@ -9,7 +9,7 @@ repository-code: "https://github.com/Somebodyhere101/head-start-or-process"
 license: MIT
 identifiers:
   - type: doi
-    value: 10.5281/zenodo.23432800
+    value: 10.5281/zenodo.23646837
     description: "The paper and its code-and-data archive on Zenodo"
   - type: doi
     value: 10.5281/zenodo.23432798
@@ -25,4 +25,4 @@ preferred-citation:
   month: 10
   publisher:
     name: Zenodo
-  doi: 10.5281/zenodo.23432800
+  doi: 10.5281/zenodo.23646837
